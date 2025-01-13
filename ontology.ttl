@@ -13,8 +13,8 @@
                                 <http://purl.org/dc/terms/created> "2024-07-23"^^xsd:date ;
                                 <http://purl.org/dc/terms/creator> "Daoud Urdu & Joep Tummers of Wageningen Economic Research" ;
                                 <http://purl.org/dc/terms/modified> "2024-07-23"^^xsd:date ;
-                                rdfs:comment "Het Referentiemodel Agro bevat concepten en relaties die het landbouw domain specificieren gebruik makend van bestaande standaarden en kennis"@nl ,
-                                             "The Referencemodel Agro contains concepts and relations that specifies the agricultural domain using existing standards and knowledge"@en ;
+                                rdfs:comment "Het Referentiemodel Agro bevat concepten en relaties die het landbouw domain specificieren, gebruik makend van bestaande standaarden en kennis"@nl ,
+                                             "The Referencemodel Agro contains concepts and relations that specifies the agricultural domain, using existing standards and knowledge"@en ;
                                 rdfs:label "Referencemodel Agro (rmAgro)"@en ,
                                            "Referentiemodel Agro (rmAgro)"@nl .
 
