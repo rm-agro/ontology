@@ -1,0 +1,847 @@
+@prefix : <https://rmagro.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rmagro: <https://rmagro.org/ontology/> .
+@prefix agroconnect: <http://agroconnect.nl/codelist#> .
+@base <https://rmagro.org/ontology/> .
+
+<https://rmagro.org/ontology/> rdf:type owl:Ontology ;
+                                <http://purl.org/dc/terms/created> "2024-07-23"^^xsd:date ;
+                                <http://purl.org/dc/terms/creator> "Daoud Urdu & Joep Tummers of Wageningen Economic Research" ;
+                                <http://purl.org/dc/terms/modified> "2024-07-23"^^xsd:date ;
+                                rdfs:comment "Het Referentiemodel Agro bevat concepten en relaties die het landbouw domain specificieren gebruik makend van bestaande standaarden en kennis"@nl ,
+                                             "The Referencemodel Agro contains concepts and relations that specifies the agricultural domain using existing standards and knowledge"@en ;
+                                rdfs:label "Referencemodel Agro (rmAgro)"@en ,
+                                           "Referentiemodel Agro (rmAgro)"@nl .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#scopeNote
+skos:scopeNote rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdfs:comment "Lists of PropertyVariables are maintained by a standardization organization. AgroConnect is such an organization and maintains lists for several PropertyCategory's. For Some Propertycategory's use is made of standards maintained by other standardization organizations like UN/CEFACT. These organizations are referenced in the PropertyCategory."@en ,
+                                   "The PropertyVariable defines a variable which can be measured by a sensor (Operation) , is the result of a (laboratory) analyses or the result of a calculation (DataProcess) . It can be used to describe properties of an Object. Objects can be Field, PartField, PropertyZone, VerticalLayer, (Batch of)Product,  (Batch of)Produce, etc."@en .
+
+
+###  https://rmagro.org/ontology/GrownDuring
+rmagro:GrownDuring rdf:type owl:ObjectProperty ;
+                   rdfs:label "grownDuring"@en .
+
+
+###  https://rmagro.org/ontology/GrownOnA
+rmagro:GrownOnA rdf:type owl:ObjectProperty ;
+                rdfs:label "grownOnA"@en .
+
+
+###  https://rmagro.org/ontology/IsGrownDuring
+rmagro:IsGrownDuring rdf:type owl:ObjectProperty ;
+                     rdfs:label "IsGrownDuring"@en .
+
+
+###  https://rmagro.org/ontology/IsGrownOnA
+rmagro:IsGrownOnA rdf:type owl:ObjectProperty ;
+                  rdfs:label "IsGrownOnA"@en .
+
+
+###  https://rmagro.org/ontology/IsSpecifiedInCodelist
+rmagro:IsSpecifiedInCodelist rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  https://rmagro.org/ontology/executes
+rmagro:executes rdf:type owl:ObjectProperty ;
+                rdfs:domain rmagro:Operation ;
+                rdfs:range rmagro:Task ;
+                rdfs:label "Executes"@en .
+
+
+###  https://rmagro.org/ontology/grows
+rmagro:grows rdf:type owl:ObjectProperty ;
+             rdfs:label "grows"@en .
+
+
+###  https://rmagro.org/ontology/has
+rmagro:has rdf:type owl:ObjectProperty ;
+           rdfs:label "has"@en .
+
+
+###  https://rmagro.org/ontology/hasAgroConnectCode
+rmagro:hasAgroConnectCode rdf:type owl:ObjectProperty .
+
+
+###  https://rmagro.org/ontology/hasLocation
+rmagro:hasLocation rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdfs:domain rmagro:Farm ;
+                   rdfs:range rmagro:CropField ;
+                   rdfs:label "hasLocation"@en .
+
+
+###  https://rmagro.org/ontology/isExecutedBy
+rmagro:isExecutedBy rdf:type owl:ObjectProperty ;
+                    rdfs:domain rmagro:Task ;
+                    rdfs:range rmagro:Operation ;
+                    rdfs:label "isExecutedBy"@en .
+
+
+###  https://rmagro.org/ontology/isLocatedAt
+rmagro:isLocatedAt rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdfs:domain rmagro:CropField ;
+                   rdfs:range rmagro:Farm ;
+                   rdfs:label "isLocatedAt"@en .
+
+
+###  https://rmagro.org/ontology/isOperatedAt
+rmagro:isOperatedAt rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain rmagro:CropField ;
+                    rdfs:range rmagro:Operation ;
+                    rdfs:label "isOperatedAt"@en .
+
+
+###  https://rmagro.org/ontology/operatesOn
+rmagro:operatesOn rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:domain rmagro:Operation ;
+                  rdfs:range rmagro:CropField ;
+                  rdfs:label "operatesOn"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#topDataProperty
+owl:topDataProperty rdfs:domain rmagro:PropertyZone ,
+                                rmagro:TreatmeantZone ;
+                    rdfs:comment "rmAgro definition: the PropertyValue describes a single value of a single PropertyVariable which is part of a DataSet and valid for the object (PropertyZone, TreatmentZone, VerticalLayer of the soil or in the canopy, Batch, Sample, etc.) as a whole, or, in case of an object that has spatial characteristics, for a specific geography within the object."@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#notation
+skos:notation rdf:type owl:DatatypeProperty ;
+              rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+              rdfs:label "notation"@en ;
+              skos:definition "A notation, also known as classification code, is a string of characters such as T58.5 or 303.4833 used to uniquely identify a concept within the scope of a given concept scheme."@en ;
+              skos:scopeNote "By convention, skos:notation is used with a typed literal in the object position of the triple."@en .
+
+
+###  https://rmagro.org/ontology/BeginDate
+rmagro:BeginDate rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain rmagro:Plot ;
+                 rdfs:range xsd:dateTimeStamp ;
+                 rdfs:label "BeginDate"@en .
+
+
+###  https://rmagro.org/ontology/Designator
+rmagro:Designator rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Designator"@en ;
+                  skos:definition "The expression given by the farm enterprise to give it a meaningful name for communication." .
+
+
+###  https://rmagro.org/ontology/EarliestBeginTime
+rmagro:EarliestBeginTime rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:range xsd:dateTimeStamp ;
+                         rdfs:label "EarliestBeginTime"@en .
+
+
+###  https://rmagro.org/ontology/EndDate
+rmagro:EndDate rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain rmagro:Plot ;
+               rdfs:range xsd:dateTimeStamp ;
+               rdfs:label "EndDate"@en .
+
+
+###  https://rmagro.org/ontology/LatestEndTime
+rmagro:LatestEndTime rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:range xsd:dateTimeStamp ;
+                     rdfs:label "LatestEndTime"@en .
+
+
+###  https://rmagro.org/ontology/PropertyValue
+rmagro:PropertyValue rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://agroconnect.nl/codelist/Meststoffen
+<http://agroconnect.nl/codelist/Meststoffen> rdf:type owl:Class ;
+                                             rdfs:subClassOf rmagro:CodeLists ;
+                                             rdfs:label "Meststoffen"@nl ;
+                                             skos:definition """AgroConnect Codelijst van alle soorten meststoffen 
+
+Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijke of synthetische oorsprong (anders dan kalkhoudende materialen) dat aan de bodem wordt toegevoegd om een of meer plantvoedingsstoffen te leveren die essentieel zijn voor de groei van planten. (bron: Glossary of Soil Science Terms)"""@nl .
+
+
+###  http://www.opengis.net/ont/geosparql#Feature
+<http://www.opengis.net/ont/geosparql#Feature> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                               owl:disjointWith <http://www.opengis.net/ont/geosparql#Geometry> ;
+                                               rdfs:isDefinedBy <http://www.opengis.net/spec/geosparql/1.0/req/core/feature-class> ;
+                                               rdfs:label "Feature" ;
+                                               skos:definition "A discrete spatial phenomenon in a universe of discourse."@en ;
+                                               skos:note "A Feature represents a uniquely identifiable phenomenon, for example a river or an apple. While such phenomena (and therefore the Features used to represent them) are bounded, their boundaries may be crisp (e.g., the declared boundaries of a state), vague (e.g., the delineation of a valley versus its neighboring mountains), and change with time (e.g., a storm front). While discrete in nature, Features may be created from continuous observations, such as an isochrone that determines the region that can be reached by ambulance within 5 minutes."@en ;
+                                               skos:prefLabel "Feature"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#Geometry
+<http://www.opengis.net/ont/geosparql#Geometry> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+                                                rdfs:isDefinedBy <http://www.opengis.net/spec/geosparql/1.0/req/geometry-extension/geometry-class> ;
+                                                rdfs:label "Geometry" ;
+                                                skos:definition "A coherent set of direct positions in space. The positions are held within a Spatial Reference System (SRS)."@en ;
+                                                skos:note "Geometry can be used as a representation of the shape, extent or location of a Feature and may exist as a self-contained entity."@en ;
+                                                skos:prefLabel "Geometry"@en .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObject
+<http://www.opengis.net/ont/geosparql#SpatialObject> rdf:type owl:Class ;
+                                                     rdfs:subClassOf skos:Concept ;
+                                                     rdfs:isDefinedBy <http://www.opengis.net/spec/geosparql/1.1/req/core/spatial-object-class> ;
+                                                     rdfs:label "SpatialObject" ;
+                                                     skos:definition "Anything spatial (being or having a shape, position or an extent)."@en ;
+                                                     skos:note "Subclasses of this class are expected to be used for instance data."@en ;
+                                                     skos:prefLabel "Spatial Object"@en .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#Point
+<http://www.w3.org/2003/01/geo/wgs84_pos#Point> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Geometry> ;
+                                                rdfs:label "Point" ;
+                                                skos:definition "A point, typically described using a coordinate system relative to Earth, such as WGS84."@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class ;
+                                   rdfs:subClassOf rmagro:Party ;
+                                   rdfs:label "Person"@en ;
+                                   skos:definition "The Person class represents people. Something is a Person if it is a person. We don't nitpic about whether they're alive, dead, real, or imaginary. The Person class is a sub-class of the Agent class, since all people are considered 'agents' in FOAF."@en .
+
+
+###  https://rmagro.org/ontology/AbsoluteTiming
+rmagro:AbsoluteTiming rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Operation ;
+                      rdfs:comment "One Operation can be executed in several time periods. It is possible to assign an urgency or timeliness value to each period. Apart from AbsoluteTiming, it is possible to specify a RelativeTiming. One can specify, for example, that a certain fertilizer gift has to be done three to two weeks before planting. Apart from AbsoluteTiming, it is possible for Tasks and Jobs to specify one or more TimeFrames. AbsoluteTiming has a more agronomical meaning, while TimeFrame has a more (machinery) management meaning."@en ;
+                      rdfs:label "AbsoluteTiming"@en ;
+                      skos:definition "A time period during which a particular Operation is planned to be, or was, executed following a certain specification."@en .
+
+
+###  https://rmagro.org/ontology/ActivityField
+rmagro:ActivityField rdf:type owl:Class ;
+                     rdfs:subClassOf rmagro:Plot ;
+                     rdfs:comment """The ActivityField can be identical to a Field or is part of a Field. In many cases it will correspond with a CropField, but this is not always the case; 
+1) Activities can be performed on a Field as a whole, when there are no crops grown, 
+2) Activities can be performed on more CropFields bordering each other, when there is a reason to distinguish them as CropFields, but operations can be executed as one activity and 
+3) Activities are performed on only a part of the CropField, like for example when a contractor is asked to harvest the headlands and fieldborders at a certain date and leave the field remnant for a later stage.
+
+To be discussed: 
+Can an Activity Field exist over more growing seasons? What should be the starting and ending date?"""@en ;
+                     rdfs:label "Activityfield"@en ;
+                     skos:definition "An ActivityField is a continuous surface of land on which activities are performed; i.e. Tasks and Operations."@en .
+
+
+###  https://rmagro.org/ontology/AgriculturalProductionOrganisation
+rmagro:AgriculturalProductionOrganisation rdf:type owl:Class ;
+                                          rdfs:subClassOf rmagro:Organisation ;
+                                          rdfs:comment "An AgriculturalProductionOrganization can have also other agricultural production activities like greenhouse crop production or an animal holding."@en ;
+                                          rdfs:label "Agricultural production organisation"@en ;
+                                          skos:definition "An organisation in the agricultural domain that has agricultural production activities"@en .
+
+
+###  https://rmagro.org/ontology/Allocation
+rmagro:Allocation rdf:type owl:Class ;
+                  rdfs:subClassOf skos:Concept ;
+                  rdfs:comment """In many cases an amount of Product or Produce  will be transferred from a certain Batch into an other Batch, but in case of harvesting it can originate from a certain TreatmentZone. In case of product application, the source is a Batch and the destination is the TreatmentZone. 
+
+In case of delivery to a third party, the destination batch might be out of the scope of the delivering party. In that case only a reference is made to the Processor."""@en ;
+                  rdfs:label "Allocation"@en ;
+                  skos:definition "Allocation describes which amount of a Product or Produce is transferred from a source to a destination."@en .
+
+
+###  https://rmagro.org/ontology/Batch
+rmagro:Batch rdf:type owl:Class ;
+             rdfs:subClassOf skos:Concept ;
+             rdfs:comment """- A Batch can be packed/stored/transported in one or more Containers. More Containers can belong to the same Batch. Product or Produce can also be stored in a pile on a flat surface.
+- When a container is filled with Product or Produce from two different Batches, a new Batch is formed.
+- A Batch of Produce can originate from; a certain HarvestingZone, another Batch, a combination of other Batches or a combination from a HarvestingZone with another Batch. A Batch of Product can be applied on a TreatmentZone. Between the arrival of the Batch of Product from a Supplier and the destination on a TreatmentZone, intermediate Batches can be formed by splitting and mixing (blending).
+- Allocation is used to describe the transfer from a source (TreatmentZone, Batch, Batches) to a destination (Batch, Batches, TreatmentZone). See Allocation for some examples.""" ;
+             rdfs:label "Batch"@en ;
+             skos:definition "A Batch is a specific identified number or quantity of Product or Produce or a mix of Product or Produce."@en .
+
+
+###  https://rmagro.org/ontology/CodeLists
+rmagro:CodeLists rdf:type owl:Class ;
+                 rdfs:subClassOf <https://www.w3.org/2009/08/skos-reference/skos.html#Collection> ;
+                 rdfs:label "CodeLists"@en .
+
+
+###  https://rmagro.org/ontology/Crop
+rmagro:Crop rdf:type owl:Class ;
+            rdfs:subClassOf skos:Concept ;
+            rdfs:comment "There are no standard coding or identifier lists for Crop's. It is the end user (farmer or other organisation) who can specify crops, eventually with normative CulturalPractises and Operations."@en ;
+            rdfs:label "Crop"@en ,
+                       "Gewas"@nl ;
+            skos:definition "The production of plant species for particular purposes and under specified conditions."@en .
+
+
+###  https://rmagro.org/ontology/CropField
+rmagro:CropField rdf:type owl:Class ;
+                 rdfs:subClassOf rmagro:Plot ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty rmagro:grows ;
+                                   owl:someValuesFrom rmagro:ProductionUnit
+                                 ] ;
+                 rdfs:comment """The surface of the CropField is always within the borders of a Field. 
+
+As a CropProductionUnit applies to only one CropClass, a CropField is grown by one CropClass.
+
+It is the farmer who decides when to split up to different CropFields. That can be a different Variety, a different purpose for which the crop is grown, a different class in seed production, the need to keep it separate for tracking and tracing purposes etc."""@en ;
+                 rdfs:label "CropField"@en ,
+                            "Gewasperceel"@nl ;
+                 skos:definition "CropField describes the continuous surface of land which is used during a period of time by a certain CropProductionUnit."@en .
+
+
+###  https://rmagro.org/ontology/CropProductionPurpose
+rmagro:CropProductionPurpose rdf:type owl:Class ;
+                             rdfs:subClassOf rmagro:Crop ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                               owl:someValuesFrom rmagro:CodeLists
+                                             ] ;
+                             rdfs:comment """Remark.
+The purpose/target/objective indicates the post harvest use of the crop. It might have consequences for the use of crop protection products and the operation technique for harvesting.
+rmagro
+Example
+Potatoes can be grown for starch, consumption (Which might be further specified as for french fries, chips, table potatoes, ....) or seed.
+
+Maize (Corn) can be grown for fresh cobs, cob/mix, silage or grain.
+
+To be discussed: 
+This implies that when a CropClass which is grown on one continuous plot is grown for different CropProductionPurpose's this plot must be separated in different CropFields."""@en ;
+                             rdfs:label "CropProductionPurpose"@en ,
+                                        "Teeltdoel"@nl ;
+                             skos:definition "The purpose/target/objective for which the crop (of a particular CropClass) is grown on a CropField or as part of a CropProductionUnit."@en .
+
+
+###  https://rmagro.org/ontology/CropProductionSequence
+rmagro:CropProductionSequence rdf:type owl:Class ;
+                              rdfs:subClassOf rmagro:Crop ;
+                              rdfs:label "CropProductionSequence"@en ;
+                              skos:definition "Describes the sequence within one growing season; indicates whether the crop is  a preceding crop, the main crop or a succeeding crop." .
+
+
+###  https://rmagro.org/ontology/CulturalPractice
+rmagro:CulturalPractice rdf:type owl:Class ;
+                        rdfs:subClassOf rmagro:Operation ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                          owl:someValuesFrom rmagro:CodeLists
+                                        ] ;
+                        rdfs:comment "The CulturalPractice does not describe the means by which the activities are performed. The means is described by OperationTechnique. For example primary soil tillage can be done with chisel plowing or with moldboard ploughing. Harvesting will include the harvesting process itself, but also the required transport."@en ;
+                        rdfs:label "CulturalPractice"@en ;
+                        skos:definition "A CulturalPractice describes one or series of Operations to realize an objective in crop production. Examples are primary soil tillage, planting, harvesting, etc."@en .
+
+
+###  https://rmagro.org/ontology/Farm
+rmagro:Farm rdf:type owl:Class ;
+            rdfs:subClassOf rmagro:AgriculturalProductionOrganisation ;
+            rdfs:comment """An AgriculturalProductionOrganization can have one or more Farms. 
+
+A farm is assumed to be operated as an independent unit and is as such also an Organization.
+
+An AgriculturalProductionOrganization can have also other agricultural production activities like greenhouse crop production or an animal holding."""@en ;
+            rdfs:label "Boerderij"@nl ,
+                       "Farm"@en ;
+            skos:definition "A Farm is part of an AgriculturalProductionOrganization located at a distinct geographic location with the objective to produce crops."@en .
+
+
+###  https://rmagro.org/ontology/Fertilizer
+rmagro:Fertilizer rdf:type owl:Class ;
+                  rdfs:subClassOf rmagro:Product ;
+                  rdfs:label "Fertilizer"@en ;
+                  skos:definition "Fertilizer (or fertiliser) is any organic or inorganic material of natural or synthetic origin (other than liming materials) that is added to a soil to supply one or more plant nutrients essential to the growth of plants. (source: Glossary of Soil Science Terms)"@en .
+
+
+###  https://rmagro.org/ontology/Field
+rmagro:Field rdf:type owl:Class ;
+             rdfs:subClassOf rmagro:Plot ;
+             rdfs:comment """A Field is assumed to be the same for many years.
+
+A whole Field can be used as CropField or as ActivityField, but a Field can also be split up in more CropField's or ActivityField's."""@en ;
+             rdfs:label "Field"@en ;
+             skos:definition "Field is a continuous piece of land, bound by topographical objects like roads, ditches, stone walls, wooded banks, farm yards, etc. and by land of another owner or operator of that land."@en .
+
+
+###  https://rmagro.org/ontology/Operation
+rmagro:Operation rdf:type owl:Class ;
+                 rdfs:subClassOf skos:Concept ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty rmagro:Designator ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ;
+                 rdfs:comment """Remarks for CropPrduction.
+In the planning stage an Operation is planned for a CropField. when assigned to a Task, it will be valid for an ActivityField. 
+
+A measurement with a sensor system or soil sampling can also be called an Operation.
+
+Examples for CropProduction:
+The CulturalPractise weed control can be realized by one of various OperationTechnique's like spraying, row cultivation, manual hoeing, etc.
+
+Examples for AnimalHusbandry:
+To be specified"""@en ;
+                 rdfs:label "Operation"@en ,
+                            "Teelt handeling"@nl ;
+                 skos:definition "An Operation performs a particular OperationTechnique on a particular CropField, ActivityField, CropProductionUnit, Batch, Animal or AnimalGroup  to realize a certain CulturalPractice or HusbandryPractise."@en .
+
+
+###  https://rmagro.org/ontology/OperationTechnique
+rmagro:OperationTechnique rdf:type owl:Class ;
+                          rdfs:subClassOf rmagro:Operation ;
+                          rdfs:comment """An unexhaustive list of examples:
+
+CulturalPractise                OperationTechnique
+
+Stubble tillage                     Chisel plowing
+                                                Stubble moldboard plowing
+                                                Disc Harrowing
+Primary soil tillage             Moldboard ploughing
+                                                Rotary ploughing
+Subsoiling                             Ripping
+Seedbed preparation        Rotary harrowing
+                                                Rotary cultivating
+                                                Cultivator harrowing
+                                                Zig-zag harrowing
+Planting                                 Drilling
+                                                Precision planting (single seed drilling)
+                                                Broadcasting
+Weed Control                       Zig-zag harrowing
+                                                Hoeing
+                                                Ridging
+                                                Broadcast herbicide spraying
+                                                Band herbicide spraying.
+Thinning                                Simple thinning
+                                                Selective thinning
+Potato ridging                     ridging
+                                                Rotary ridging
+Fertilizer application        Broadcasting
+                                                Side dressing"""@en ;
+                          rdfs:label "OperationTechnique"@en ;
+                          skos:definition "An OperationTechnique is the means by which a CulturalPractise can be realized."@en .
+
+
+###  https://rmagro.org/ontology/Organisation
+rmagro:Organisation rdf:type owl:Class ;
+                    rdfs:subClassOf rmagro:Party ;
+                    rdfs:label "Organisation"@en ;
+                    skos:definition "An organisation is a group of people, a compony (enterprise), or a group of companies (enterprises)"@en .
+
+
+###  https://rmagro.org/ontology/Party
+rmagro:Party rdf:type owl:Class ;
+             rdfs:subClassOf skos:Concept ;
+             rdfs:comment "A Device (robot, machine, sensor, etc.) can also have a role in a business process."@en ;
+             rdfs:label "Party"@en ;
+             skos:definition "An individual, a group, or a body having a role in a business function.  Party has a legal connotation in a business transaction. (after UN/CEFACT)"@en .
+
+
+###  https://rmagro.org/ontology/PlantProtectionProduct
+rmagro:PlantProtectionProduct rdf:type owl:Class ;
+                              rdfs:subClassOf rmagro:Product ;
+                              rdfs:comment """Remark.
+
+Definition in EC 1107/2009
+products consisting of or containing active substances, safeners or synergists, and intended for one of the following uses: 
+protecting plants or plant products against all harmful organisms or preventing the action of such organisms, unless the main purpose of these products is considered to be for reasons of hygiene rather than for the protection of plants or plant products;
+influencing the life processes of plants, such as substances influencing their growth, other than as a nutrient;
+preserving plant products, in so far as such substances or products are not subject to special Community provisions on preservatives;
+destroying undesired plants or parts of plants, except algae unless the products are applied on soil or water to protect plants;
+checking or preventing undesired growth of plants, except algae."""@en ;
+                              rdfs:label "PlantProtectionProduct"@en ;
+                              skos:definition "A Product of the class PlantProtectionProduct, which requires Authorization for use in a particular area of application."@en .
+
+
+###  https://rmagro.org/ontology/PlantProtectionProductUseCondition
+rmagro:PlantProtectionProductUseCondition rdf:type owl:Class ;
+                                          rdfs:subClassOf rmagro:PlantProtectionProduct ;
+                                          rdfs:label "PlantProtectionProductUseCondition"@en ;
+                                          skos:definition "The condition/terms under which the Authorisation of a Biocide is valid"@en .
+
+
+###  https://rmagro.org/ontology/Plot
+rmagro:Plot rdf:type owl:Class ;
+            rdfs:subClassOf skos:Concept ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty rmagro:BeginDate ;
+                              owl:someValuesFrom xsd:dateTime
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty rmagro:EndDate ;
+                              owl:someValuesFrom xsd:dateTime
+                            ] ;
+            rdfs:comment """Different types of growing surfaces are:
+- Field
+- CropField
+- ActivityField
+- CadastralField
+- ExperimentalPlot
+- Greenhouse"""@en ;
+            rdfs:label "Plot"@en ;
+            skos:definition "Abstract object that holds the common attributes of the different types of Growing surfaces. A Plot is a continuous surface."@en .
+
+
+###  https://rmagro.org/ontology/Produce
+rmagro:Produce rdf:type owl:Class ;
+               rdfs:subClassOf skos:Concept ;
+               rdfs:comment """Examples:
+- Sugar beets
+- Table potatoes
+- Soft wheat (the kernels)
+- Wheat straw
+- Milk
+- Eggs
+- Manure (in case of an animal farm, for an arable farm it will be a Product)"""@en ;
+               rdfs:label "Produce"@en ;
+               skos:definition "Produce is the result of agricultural production. It is the output."@en .
+
+
+###  https://rmagro.org/ontology/ProduceAllocation
+rmagro:ProduceAllocation rdf:type owl:Class ;
+                         rdfs:subClassOf rmagro:Allocation ;
+                         rdfs:comment """Remark.
+In many cases an amount of Produce  will be transferred from a certain Batc into an other Batch, but in case of harvesting it originates from a certain HarvestingZone.
+
+In case of delivery to a third party, the destination of the Lot might be out of the scope of the supplying party. In that case only a reference is made to the Customer.
+
+Example.
+
+Crop Production. 
+The allocation can be an amount of Produce originating from a HarvestingZone ( hz1) during harvesting, which ends up in a grain tank on the harvester (the Batch B1). hz1 is the strips that are harvested for that grain-tank load. This grain-tank load (B1) can be put in a trailer (Batch B2). A next grain tank load (Batch B3) harvested from the strips forming the next HarvestingZone hz2, can be added to the trailer ( still Batch B2, now connected to two instances of Allocation). The trailer (Batch B2) can be put in a grain storage (Batch B4).
+
+Horticulture
+The allocation is an amount of Produce (tomatoes) collected from a HarvestingZone (a particular row or a collection of rows) and placed in a Container (of the classifiacation Box ??? )"""@en ;
+                         rdfs:label "ProduceAllocation"@en ;
+                         skos:definition "A ProduceAllocation describes which amount of Produce is transferred from a source to a destination."@en .
+
+
+###  https://rmagro.org/ontology/Product
+rmagro:Product rdf:type owl:Class ;
+               rdfs:subClassOf skos:Concept ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                 owl:someValuesFrom rmagro:CodeLists
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty rmagro:Designator ;
+                                 owl:someValuesFrom xsd:string
+                               ] ;
+               rdfs:comment """Examples:
+- Kalkamonsalpeter
+- Water
+- NPK 17-17-17"""@en ;
+               rdfs:label "Product"@en ;
+               skos:definition "Product is what is used as input for agricultural production."@en .
+
+
+###  https://rmagro.org/ontology/ProductAllocation
+rmagro:ProductAllocation rdf:type owl:Class ;
+                         rdfs:subClassOf rmagro:Product ;
+                         rdfs:comment """In many cases an amount of Product will be transferred from a certain Lot into an other Lot, but in case of applying products to a crop the source is a Lot and the destination is the TreatmentZone.
+When products are applied to a storage with Produce, the source is a Lot and the destination is also a Lot, but from a different type of product or produce.
+
+In case of delivery to a third party, the destination batch might be out of the scope of the delivering party. In that case only a reference is made to the Processor.
+
+Example.
+The allocation can be an amount of Produce originating from a TreatmentZone ( tr1) during harvesting, which ends up in a grain tank on the harvester (the Batch batch 1). tr1 is the strips that are harvested for that grain-tank. This grain-tank load (batch 1) can be put in a trailer (batch 2). A next grain tank load (batch 3) harvested from the strips forming the next TreatmentZone tr2, can be added to the trailer ( still batch 2, now connected to two instances of Allocation). The trailer (batch 2) can be put in a grain storage (batch 4).""" ;
+                         rdfs:label "ProductAllocation"@en ;
+                         skos:definition "A ProductAllocation describes which amount of a Product is transferred from a source to a destination." .
+
+
+###  https://rmagro.org/ontology/ProductComposition
+rmagro:ProductComposition rdf:type owl:Class ;
+                          rdfs:subClassOf rmagro:Product ;
+                          rdfs:comment """In case of blending of complete Product's a new BatchLot should be created with reference and Quantity of products where it originates from. based on the composition of the used Product's, a ProductComposition for the new BatchLot can be calculated.
+
+In case of a generic description (for example by means of a Recipe) how to assemble products to realise a new Product, ProductAssembly should be used."""@en ;
+                          rdfs:label "ProductComposition"@en ;
+                          skos:definition "A ProductComposition describes the contribution of a particular ProductElement to the composition of that Product"@en .
+
+
+###  https://rmagro.org/ontology/ProductionPeriod
+rmagro:ProductionPeriod rdf:type owl:Class ;
+                        rdfs:subClassOf rmagro:Crop ;
+                        rdfs:label "ProductionPeriod"@en ;
+                        skos:definition "The period, season, in which a CropSpecies can be grown and a CropField is grown."@en .
+
+
+###  https://rmagro.org/ontology/ProductionUnit
+rmagro:ProductionUnit rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Crop ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty rmagro:GrownDuring ;
+                                        owl:someValuesFrom rmagro:ProductionPeriod
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty rmagro:GrownOnA ;
+                                        owl:someValuesFrom rmagro:CropField
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty rmagro:has ;
+                                        owl:someValuesFrom rmagro:CropProductionPurpose
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty rmagro:has ;
+                                        owl:someValuesFrom rmagro:Variety
+                                      ] ;
+                      rdfs:comment """Reasons to separate the same CropClass in different CropProductionUnit's are determined by the farm enterprise. In many cases a different variety will lead to different CropProductionUnit's, but also the purpose for which crops are grown can be a reason ( seed production versus consumption) or in case of seed production the differences in classification can be a reason.
+
+CropField is  used to specify the time period during which the CropProductionUnit occupies a certain area of a Field and the status (planned, realised, ...) .
+
+Operations are planned and executed on an ActivityField which can be the same surface as a CropField, but also a combination of more CropFields or only a part of a CropField.
+
+Activities on a CropProductionUnit can also include those which are not executed on a ActivityField like sorting of planting material and storage of the Produce. 
+
+An organisation can decide to start and stop the CropProductionUnit when field activities start and finish, and see Batches of Product (the seed) or Produce (what is harvested) as a unit of production"""@en ;
+                      rdfs:label "CropProductionUnit"@en ;
+                      skos:definition "The cultivation of one CropClass on one or more CropField's which is seen by the Farm enterprise as one unit of production which should be distinguished from other CropProductionUnits's."@en .
+
+
+###  https://rmagro.org/ontology/PropertyZone
+rmagro:PropertyZone rdf:type owl:Class ;
+                    rdfs:subClassOf rmagro:Zone ;
+                    rdfs:comment """PropertyZone uses one or more Polygon's to describe the MultiSurface with uniform properties.
+
+An example of a PropertyZone is a map of soil types which PropertyZones can extend the borders of a farm."""@en ;
+                    rdfs:label "PropertyZone"@en ;
+                    skos:definition "A PropertyZone defines a surface  which has a uniform PropertyValue, or a range of PropertyValues defined by a minimum and a maximum value for that property zone.  A PropertyZone is described by a MultiSurface. propertyZone is not restricted to the borders of a Field, CropField or ActivityField."@en .
+
+
+###  https://rmagro.org/ontology/RelativeTiming
+rmagro:RelativeTiming rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Operation ;
+                      rdfs:comment """The reference for the timing can be the time in respect of another Operation, the time in respect of a growth stage, or the time in respect of the moment when a certain temperature sum is reached.
+
+Remark 2.
+When Relative Timing can be associated with other PropertyValues of the PropertyVariables GrowthStage and/or TemperatureSum, then an association should be considered instead of the construction with attributes. This is not that difficult as PropertyValue can indicate a minimum and a maximum value by the PropertyValueCharacteristic."""@en ;
+                      rdfs:label "RelativeTiming"@en ;
+                      skos:definition "The timing of an operation in respect of a reference."@en .
+
+
+###  https://rmagro.org/ontology/SeedAndPropagationMaterial
+rmagro:SeedAndPropagationMaterial rdf:type owl:Class ;
+                                  rdfs:subClassOf rmagro:Product ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty rmagro:has ;
+                                                    owl:someValuesFrom rmagro:Variety
+                                                  ] ;
+                                  rdfs:label "SeedAndPropagationMaterial"@en ;
+                                  skos:definition "Propagating part of a plant such as seed, tubers, spore, etc."@en .
+
+
+###  https://rmagro.org/ontology/Species
+rmagro:Species rdf:type owl:Class ;
+               rdfs:subClassOf rmagro:Crop ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                 owl:someValuesFrom rmagro:CodeLists
+                               ] ;
+               rdfs:comment "PlantSpecies is a specific plant in the Plant Genus. the latter is a group of related plants."@en ;
+               rdfs:label "Gewasssoort"@nl ,
+                          "Species"@en ;
+               skos:definition "A PlantSpecies is the basic unit of classification in the Lineus taxonomic classification system."@en .
+
+
+###  https://rmagro.org/ontology/Task
+rmagro:Task rdf:type owl:Class ;
+            rdfs:subClassOf skos:Concept ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty rmagro:Designator ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty rmagro:EarliestBeginTime ;
+                              owl:someValuesFrom xsd:dateTimeStamp
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty rmagro:LatestEndTime ;
+                              owl:someValuesFrom xsd:dateTimeStamp
+                            ] ;
+            rdfs:comment "An Operation can be executed by more Tasks.(See example). Therefore, there is a many to many relation between Task and Operation." ,
+                         """Example.
+There is one Task \"Harrowing and Drilling\", which performs two Operation's; one is \"Harrowing\" and the other is \"Drilling\".
+On the other hand, there can be two Task's that realize one Operation. For example two combines harvesting on one ActivityField.""" ;
+            rdfs:label "Task"@en ;
+            skos:definition "A Task is the execution of one or more Operation's." .
+
+
+###  https://rmagro.org/ontology/TaskStatusCode
+rmagro:TaskStatusCode rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Task ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                        owl:someValuesFrom rmagro:CodeLists
+                                      ] ;
+                      rdfs:label "TaskStatusCode"@en .
+
+
+###  https://rmagro.org/ontology/TreatmeantZone
+rmagro:TreatmeantZone rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Zone ;
+                      rdfs:comment """By defining more TreatmentZone's in a CropField or ActivityField it is possible to specify site specific application of Product's or machine settings.
+TreatmentZone can also be used for the Operation Soil Sampling to specify the surfaces for which one SoilSample should be collected.
+
+TreatmentZone uses one or more Polygon's, i.e. a MultiSurface, to describe the surface(s) with uniform treatment.
+
+A TreatmentZone is only intended to specify treatments; i.e. application of products or the specification of working (for example working depth). 
+
+To characterize properties of an area, like for example soil type, the PropertyZone is used.
+
+For the collection of Produce, harvesting, the HarvestingZone is used.""" ;
+                      rdfs:label "TreatmeantZone"@en ;
+                      skos:definition "A TreatmentZone defines a surface in a CropField or ActivityField, which gets a uniform treatment in that surface by an Operation. A TreatmentZone is described by a MultiSurface."@en .
+
+
+###  https://rmagro.org/ontology/Variety
+rmagro:Variety rdf:type owl:Class ;
+               rdfs:subClassOf rmagro:Crop ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty rmagro:IsSpecifiedInCodelist ;
+                                 owl:someValuesFrom rmagro:CodeLists
+                               ] ;
+               rdfs:comment "Recognition of a cultivated plant (a cultivar) as a variety in this particular sense provides its breeder with some legal protection, so-called plant breeders' rights, depending to some extent on the internal legislation of the UPOV signatory countries, such as the Plant Variety Protection Act in the US. (Source: Wikipedia)"@en ;
+               rdfs:label "Ras"@nl ,
+                          "Variety"@en ;
+               skos:definition "Plant variety is a legal term, following the International Union for the Protection of New Varieties of Plants (UPOV) Convention. (Source: Wikipedia)"@en .
+
+
+###  https://rmagro.org/ontology/VerticalLayer
+rmagro:VerticalLayer rdf:type owl:Class ;
+                     rdfs:subClassOf rmagro:Crop ;
+                     rdfs:comment """In a crop canopy the zero plain is always the soil surface. 
+In the soil, the layer can be described in respect of the soil surface, but eventually also in respect of the Z plain of the used coordinate system.
+The expression Vertical is added to prevent confusion with a map layer."""@en ;
+                     rdfs:label "VerticalLayer"@en ;
+                     skos:definition "A VerticalLayer describes the vertical dimension, either downwards in the soil, or upwards in a crop canopy."@en .
+
+
+###  https://rmagro.org/ontology/Zone
+rmagro:Zone rdf:type owl:Class ;
+            rdfs:subClassOf skos:Concept ;
+            rdfs:comment "A zone is an abstract object which has TreatmentZone, PropertyZone, EnvironmentalProtectionZone, HarvestingZone, and DesignatedZone as specializations."@en ;
+            rdfs:label "Zone"@en ;
+            skos:definition "A Zone defines a surface in a CropField, ActivityField, AnimalHouse, or Greenhouse. A Zone is described by one or more Polygons and/or a collection of GridPoints."@en .
+
+
+###  https://rmagro.org/ontology/cadastralField
+rmagro:cadastralField rdf:type owl:Class ;
+                      rdfs:subClassOf rmagro:Plot ;
+                      rdfs:comment """Een onroerende zaak, onderkend als een deel van het Nederlands grondgebied van welk deel het Kadaster de begrenzing met behulp van landmeetkundige gegevens heeft vastgelegd op grond van gegevens betreffende de rechtstoestand, bestemming en het gebruik en dat door zijn kadastrale aanduiding is gekenmerkt. Als onderdeel van het Nederlands grondgebied is het een driedimensionaal ruimtelijk object.
+
+Herkomst Nederlandse definitie.
+Artikel 1 Kadasterwet."""@nl ;
+                      rdfs:label "CadastralField"@en ;
+                      skos:definition "A CadastralField describes the meet-and-bounds of a real property, often together with properties like ownership, price of the last transaction, etc."@en .
+
+
+###  https://www.w3.org/2009/08/skos-reference/skos.html#Collection
+<https://www.w3.org/2009/08/skos-reference/skos.html#Collection> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://rmagro.org/ontology/CL232
+rmagro:CL232 rdf:type owl:NamedIndividual ;
+             rdfs:label "CL232"@en .
+
+
+###  https://rmagro.org/ontology/nl.cl123
+rmagro:nl.cl123 rdf:type owl:NamedIndividual ;
+                rdfs:label "nl.cl123"@en .
+
+
+###  https://rmagro.org/ontology/nl.cl251
+rmagro:nl.cl251 rdf:type owl:NamedIndividual ;
+                rdfs:label "nl.cl251"@en .
+
+
+###  https://rmagro.org/ontology/nl.cl263
+rmagro:nl.cl263 rdf:type owl:NamedIndividual ;
+                rdfs:label "nl.cl263"@en .
+
+
+###  https://rmagro.org/ontology/CL127%3A6
+<https://rmagro.org/ontology/CL127%3A6> rdf:type owl:NamedIndividual ;
+                                        rdfs:label "CL127:6"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+skos:Concept rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+             rdfs:label "Concept"@en ;
+             skos:definition "An idea or notion; a unit of thought."@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
