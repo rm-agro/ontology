@@ -29,4 +29,4 @@ For questions or support, please contact the RMAGRO team via [info@rmagro.org](m
 
 ---
 
-![RMAGRO Illustration](images/rmagro.jpg)
+![RMAGRO Illustration](images/rmagro.png)
