@@ -113,10 +113,6 @@ rmagro:has rdf:type owl:ObjectProperty ;
            rdfs:label "has"@en .
 
 
-###  https://rmagro.org/ontology/hasAgroConnectCode
-rmagro:hasAgroConnectCode rdf:type owl:ObjectProperty .
-
-
 ###  https://rmagro.org/ontology/hasLocation
 rmagro:hasLocation rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf owl:topObjectProperty ;
@@ -226,7 +222,8 @@ rmagro:PropertyValue rdf:type owl:DatatypeProperty .
                                              rdfs:label "Meststoffen"@nl ;
                                              skos:definition """AgroConnect Codelijst van alle soorten meststoffen 
 
-Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijke of synthetische oorsprong (anders dan kalkhoudende materialen) dat aan de bodem wordt toegevoegd om een of meer plantvoedingsstoffen te leveren die essentieel zijn voor de groei van planten. (bron: Glossary of Soil Science Terms)"""@nl .
+Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijke of synthetische oorsprong (anders dan kalkhoudende materialen) dat aan de bodem wordt toegevoegd om een of meer plantvoedingsstoffen te leveren die essentieel zijn voor de groei van planten. (bron: Glossary of Soil Science Terms)"""@nl ,
+                                                             "Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijke of synthetische oorsprong (anders dan kalkhoudende materialen) dat aan de bodem wordt toegevoegd om een of meer plantvoedingsstoffen te leveren die essentieel zijn voor de groei van planten. (bron: Glossary of Soil Science Terms)"@nl .
 
 
 ###  http://www.opengis.net/ont/geosparql#Feature
@@ -418,8 +415,10 @@ An AgriculturalProductionOrganization can have also other agricultural productio
 ###  https://rmagro.org/ontology/Fertilizer
 rmagro:Fertilizer rdf:type owl:Class ;
                   rdfs:subClassOf rmagro:Product ;
-                  rdfs:label "Fertilizer"@en ;
-                  skos:definition "Fertilizer (or fertiliser) is any organic or inorganic material of natural or synthetic origin (other than liming materials) that is added to a soil to supply one or more plant nutrients essential to the growth of plants. (source: Glossary of Soil Science Terms)"@en .
+                  rdfs:label "Fertilizer"@en ,
+                             "Meststoffen"@nl ;
+                  skos:definition "Fertilizer (or fertiliser) is any organic or inorganic material of natural or synthetic origin (other than liming materials) that is added to a soil to supply one or more plant nutrients essential to the growth of plants. (source: Glossary of Soil Science Terms)"@en ,
+                                  "Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijke of synthetische oorsprong (anders dan kalkhoudende materialen) dat aan de bodem wordt toegevoegd om een of meer plantvoedingsstoffen te leveren die essentieel zijn voor de groei van planten. (bron: Glossary of Soil Science Terms)"@nl .
 
 
 ###  https://rmagro.org/ontology/Field
