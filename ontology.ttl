@@ -433,7 +433,7 @@ A whole Field can be used as CropField or as ActivityField, but a Field can also
 
 ###  https://rmagro.org/ontology/Operation
 rmagro:Operation rdf:type owl:Class ;
-                 rdfs:subClassOf skos:Concept ,
+                 rdfs:subClassOf rmagro:Crop ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty rmagro:Designator ;
                                    owl:someValuesFrom xsd:string
