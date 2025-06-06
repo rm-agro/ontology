@@ -29,7 +29,7 @@ jobs:
         mkdir -p dist
 
         echo "Converting ontology.ttl to RDF/XML"
-        java -jar robot.jar convert --input ontology.ttl --format rdfxml --output dist/ontology.rdf
+        java -jar robot.jar convert --input ontology.ttl --format rdfxml-abbrev --output dist/ontology.rdf
 
         echo "Converting ontology.ttl to N-Triples"
         java -jar robot.jar convert --input ontology.ttl --format ntriples --output dist/ontology.nt
