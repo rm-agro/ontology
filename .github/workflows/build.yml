@@ -1,0 +1,56 @@
+name: Build Linked Data Exports
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Java (needed for ROBOT)
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Download ROBOT
+      run: |
+        curl -L https://github.com/ontodev/robot/releases/download/v1.9.4/robot.jar -o robot.jar
+
+    - name: Convert TTL to JSON-LD, RDF/XML, N-Triples, Notation3
+      run: |
+        mkdir -p dist
+
+        echo "Converting ontology.ttl to JSON-LD"
+        java -jar robot.jar convert --input ontology.ttl --format jsonld --output dist/ontology.jsonld
+
+        echo "Converting ontology.ttl to RDF/XML"
+        java -jar robot.jar convert --input ontology.ttl --format rdfxml --output dist/ontology.rdf
+
+        echo "Converting ontology.ttl to N-Triples"
+        java -jar robot.jar convert --input ontology.ttl --format ntriples --output dist/ontology.nt
+
+        echo "Converting ontology.ttl to Notation3"
+        java -jar robot.jar convert --input ontology.ttl --format n3 --output dist/ontology.n3
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linked-data-exports
+        path: dist
+
+    # Optional: Commit dist folder back to main branch
+    - name: Commit dist folder to repository
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: GitHub Actions
+        author_email: actions@github.com
+        message: 'Update Linked Data exports'
+        add: 'dist/*'
