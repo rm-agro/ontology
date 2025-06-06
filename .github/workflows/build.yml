@@ -19,11 +19,26 @@ jobs:
 
     - name: Install Apache Jena and ROBOT
       run: |
-        wget -O apache-jena.tar.gz https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz
-        tar -xzf apache-jena.tar.gz
+        for mirror in \
+          "https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz" \
+          "https://archive.apache.org/dist/jena/binaries/apache-jena-5.3.0.tar.gz" \
+          "https://www.apache.org/dyn/closer.lua/jena/binaries/apache-jena-5.3.0.tar.gz?action=download"; do
+          echo "Trying to download from: $mirror"
+          if wget --timeout=30 --tries=3 "$mirror" -O apache-jena-5.3.0.tar.gz; then
+            echo "Download successful from: $mirror"
+            break
+          else
+            echo "Failed to download from: $mirror"
+          fi
+        done
+        if [ ! -f apache-jena-5.3.0.tar.gz ]; then
+          echo "All download attempts failed"
+          exit 1
+        fi
+        tar -xzf apache-jena-5.3.0.tar.gz
         wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
 
-    - name: Convert TTL to all formats (using Apache Jena riot)
+    - name: Convert TTL to all formats
       run: |
         mkdir -p dist/full
         ./apache-jena-5.3.0/bin/riot --output=RDF/XML ontology.ttl > dist/full/ontology.rdf
@@ -31,7 +46,7 @@ jobs:
         ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl > dist/full/ontology.nt
         ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/full/ontology.n3
 
-    - name: Extract concepts and convert formats
+    - name: Extract concepts and convert
       run: |
         mkdir -p dist/concepts
 
@@ -41,7 +56,6 @@ jobs:
           --csv class_list.csv
 
         tail -n +2 class_list.csv | sed 's|https://rmagro.org/ontology/||' > concept_names.txt
-        cat concept_names.txt
 
         for concept in $(cat concept_names.txt); do
           echo "Processing concept: $concept"
