@@ -14,48 +14,116 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Install Apache Jena (for all conversions)
+    
+    - name: Convert TTL to all formats and extract individual concepts
       run: |
-        # Try multiple mirrors with retry logic
-        for mirror in \
-          "https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz" \
-          "https://archive.apache.org/dist/jena/binaries/apache-jena-5.3.0.tar.gz" \
-          "https://www.apache.org/dyn/closer.lua/jena/binaries/apache-jena-5.3.0.tar.gz?action=download"; do
-          echo "Trying to download from: $mirror"
-          if wget --timeout=30 --tries=3 "$mirror" -O apache-jena-5.3.0.tar.gz; then
-            echo "Download successful from: $mirror"
-            break
-          else
-            echo "Failed to download from: $mirror"
+        mkdir -p dist/full dist/concepts
+        
+        # First, convert the full ontology to different formats
+        echo "Converting full ontology.ttl to RDF/XML"
+        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=RDF/XML /data/ontology.ttl > dist/full/ontology.rdf
+        
+        echo "Converting full ontology.ttl to JSON-LD"
+        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=JSON-LD /data/ontology.ttl > dist/full/ontology.jsonld
+        
+        echo "Converting full ontology.ttl to N-Triples"
+        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples /data/ontology.ttl > dist/full/ontology.nt
+        
+        echo "Converting full ontology.ttl to N3"
+        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N3 /data/ontology.ttl > dist/full/ontology.n3
+        
+        # Install ROBOT tool
+        echo "Installing ROBOT tool"
+        wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
+        
+        # Extract all class names from the ontology
+        echo "Extracting concept names..."
+        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples /data/ontology.ttl | \
+        grep "rdf:type.*owl:Class" | \
+        grep "rmagro:" | \
+        sed 's/<https:\/\/rmagro\.org\/ontology\/\([^>]*\)>.*/\1/' > concept_names.txt
+        
+        echo "Found concepts:"
+        cat concept_names.txt
+        
+        # For each concept, extract it with ROBOT
+        echo "Extracting individual concepts..."
+        while IFS= read -r concept; do
+          if [ ! -z "$concept" ] && [ "$concept" != "Batch" ]; then # Skip empty lines and avoid issues
+            echo "Processing concept: $concept"
+            
+            # Create temporary file with the concept IRI
+            echo "https://rmagro.org/ontology/$concept" > temp_concept.txt
+            
+            # Extract concept with ROBOT
+            java -jar robot.jar extract \
+              --input ontology.ttl \
+              --method STAR \
+              --term-file temp_concept.txt \
+              --output "dist/concepts/${concept}.ttl" \
+              --format turtle 2>/dev/null || echo "Failed to extract $concept with ROBOT"
+            
+            # If ROBOT extraction failed, try a simpler SPARQL-based approach
+            if [ ! -f "dist/concepts/${concept}.ttl" ] || [ ! -s "dist/concepts/${concept}.ttl" ]; then
+              echo "Trying alternative extraction for $concept..."
+              docker run --rm -v $(pwd):/data stain/jena:latest sparql \
+                --data /data/ontology.ttl \
+                --query <(cat << EOF
+PREFIX rmagro: <https://rmagro.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+  rmagro:$concept ?p ?o .
+  ?s ?p2 rmagro:$concept .
+} WHERE {
+  {
+    rmagro:$concept ?p ?o .
+  } UNION {
+    ?s ?p2 rmagro:$concept .
+  }
+}
+EOF
+) --results turtle > "dist/concepts/${concept}.ttl" 2>/dev/null || echo "SPARQL extraction also failed for $concept"
+            fi
+            
+            # Convert to other formats if extraction succeeded
+            if [ -f "dist/concepts/${concept}.ttl" ] && [ -s "dist/concepts/${concept}.ttl" ]; then
+              echo "Converting $concept to other formats..."
+              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=RDF/XML "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.rdf" 2>/dev/null || echo "Failed RDF/XML for $concept"
+              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=JSON-LD "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.jsonld" 2>/dev/null || echo "Failed JSON-LD for $concept"
+              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.nt" 2>/dev/null || echo "Failed N-Triples for $concept"
+              echo "Successfully processed: $concept"
+            else
+              echo "No content extracted for: $concept"
+            fi
+            
+            # Cleanup
+            rm -f temp_concept.txt
           fi
-        done
+        done < concept_names.txt
         
-        if [ ! -f apache-jena-5.3.0.tar.gz ]; then
-          echo "All download attempts failed"
-          exit 1
-        fi
-        
-        tar -xzf apache-jena-5.3.0.tar.gz
-    - name: Convert TTL to all formats (using Apache Jena riot)
-      run: |
-        mkdir -p dist
-        echo "Converting ontology.ttl to RDF/XML"
-        ./apache-jena-5.3.0/bin/riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
-        echo "Converting ontology.ttl to JSON-LD"
-        ./apache-jena-5.3.0/bin/riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
-        echo "Converting ontology.ttl to N-Triples"
-        ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl > dist/ontology.nt
-        echo "Converting ontology.ttl to N3"
-        ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/ontology.n3
+        echo "Extraction complete. Generated files:"
+        find dist/ -name "*.ttl" -o -name "*.rdf" -o -name "*.jsonld" -o -name "*.nt" | sort
+    
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: linked-data-exports
         path: dist
-    - name: Commit dist folder to repository
-      uses: EndBug/add-and-commit@v9
+    
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
       with:
-        author_name: GitHub Actions
-        author_email: actions@github.com
-        message: 'Update Linked Data exports'
-        add: 'dist/*'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Update Linked Data exports'
+        title: 'Auto-update: Linked Data exports'
+        body: |
+          Automated update of Linked Data exports:
+          - ontology.rdf (RDF/XML)
+          - ontology.jsonld (JSON-LD) 
+          - ontology.nt (N-Triples)
+          - ontology.n3 (N3)
+        branch: update-linked-data-exports
+        delete-branch: true
