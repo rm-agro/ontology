@@ -63,8 +63,8 @@ jobs:
         echo "Extracting concept names..."
         ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl | \
         grep "rdf:type.*owl:Class" | \
-        grep "rmagro:" | \
-        sed 's/<https:\/\/rmagro\.org\/ontology\/\([^>]*\)>.*/\1/' > concept_names.txt
+        grep -o '<https://rmagro\.org/ontology/[^>]*>' | \
+        sed 's|<https://rmagro\.org/ontology/||;s|>||' > concept_names.txt
 
         echo "Found concepts:"
         cat concept_names.txt
