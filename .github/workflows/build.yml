@@ -18,24 +18,22 @@ jobs:
       run: |
         wget https://downloads.apache.org/jena/binaries/apache-jena-4.9.0.tar.gz
         tar -xzf apache-jena-4.9.0.tar.gz
-        export PATH=$PWD/apache-jena-4.9.0/bin:$PATH
 
     - name: Convert TTL to all formats (using Apache Jena riot)
       run: |
-        export PATH=$PWD/apache-jena-4.9.0/bin:$PATH
         mkdir -p dist
 
         echo "Converting ontology.ttl to RDF/XML"
-        riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
+        ./apache-jena-4.9.0/bin/riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
 
         echo "Converting ontology.ttl to JSON-LD"
-        riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
+        ./apache-jena-4.9.0/bin/riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
 
         echo "Converting ontology.ttl to N-Triples"
-        riot --output=N-Triples ontology.ttl > dist/ontology.nt
+        ./apache-jena-4.9.0/bin/riot --output=N-Triples ontology.ttl > dist/ontology.nt
 
         echo "Converting ontology.ttl to N3"
-        riot --output=N3 ontology.ttl > dist/ontology.n3
+        ./apache-jena-4.9.0/bin/riot --output=N3 ontology.ttl > dist/ontology.n3
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
