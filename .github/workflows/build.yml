@@ -14,40 +14,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install Java (needed for ROBOT)
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Download ROBOT
-      run: |
-        curl -L https://github.com/ontodev/robot/releases/download/v1.9.4/robot.jar -o robot.jar
-
-    - name: Convert TTL to RDF/XML, N-Triples, Notation3
-      run: |
-        mkdir -p dist
-
-        echo "Converting ontology.ttl to RDF/XML"
-        java -jar robot.jar convert --input ontology.ttl --format rdfxml-abbrev --output dist/ontology.rdf
-
-        echo "Converting ontology.ttl to N-Triples"
-        java -jar robot.jar convert --input ontology.ttl --format ntriples --output dist/ontology.nt
-
-        echo "Converting ontology.ttl to Notation3"
-        java -jar robot.jar convert --input ontology.ttl --format n3 --output dist/ontology.n3
-
-    - name: Install Apache Jena (for JSON-LD conversion)
+    - name: Install Apache Jena (for all conversions)
       run: |
         wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.10.0.tar.gz
         tar -xzf apache-jena-4.10.0.tar.gz
         export PATH=$PWD/apache-jena-4.10.0/bin:$PATH
 
-    - name: Convert TTL to JSON-LD (using Apache Jena riot)
+    - name: Convert TTL to all formats (using Apache Jena riot)
       run: |
         export PATH=$PWD/apache-jena-4.10.0/bin:$PATH
         mkdir -p dist
+
+        echo "Converting ontology.ttl to RDF/XML"
+        riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
+
+        echo "Converting ontology.ttl to JSON-LD"
         riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
+
+        echo "Converting ontology.ttl to N-Triples"
+        riot --output=N-Triples ontology.ttl > dist/ontology.nt
+
+        echo "Converting ontology.ttl to N3"
+        riot --output=N3 ontology.ttl > dist/ontology.n3
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
