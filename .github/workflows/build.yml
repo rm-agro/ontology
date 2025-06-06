@@ -1,46 +1,35 @@
 name: Build Linked Data Exports
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
     - name: Install Apache Jena (for all conversions)
       run: |
-        wget https://downloads.apache.org/jena/binaries/apache-jena-4.9.0.tar.gz
-        tar -xzf apache-jena-4.9.0.tar.gz
-
+        wget https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz
+        tar -xzf apache-jena-5.3.0.tar.gz
     - name: Convert TTL to all formats (using Apache Jena riot)
       run: |
         mkdir -p dist
-
         echo "Converting ontology.ttl to RDF/XML"
-        ./apache-jena-4.9.0/bin/riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
-
+        ./apache-jena-5.3.0/bin/riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
         echo "Converting ontology.ttl to JSON-LD"
-        ./apache-jena-4.9.0/bin/riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
-
+        ./apache-jena-5.3.0/bin/riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
         echo "Converting ontology.ttl to N-Triples"
-        ./apache-jena-4.9.0/bin/riot --output=N-Triples ontology.ttl > dist/ontology.nt
-
+        ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl > dist/ontology.nt
         echo "Converting ontology.ttl to N3"
-        ./apache-jena-4.9.0/bin/riot --output=N3 ontology.ttl > dist/ontology.n3
-
+        ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/ontology.n3
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: linked-data-exports
         path: dist
-
     - name: Commit dist folder to repository
       uses: EndBug/add-and-commit@v9
       with:
