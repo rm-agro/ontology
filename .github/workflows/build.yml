@@ -53,7 +53,8 @@ jobs:
         java -jar robot.jar query \
           --input ontology.ttl \
           --query queries/get-classes.rq \
-          --csv class_list.csv
+          --format csv \
+          --output class_list.csv
 
         tail -n +2 class_list.csv | sed 's|https://rmagro.org/ontology/||' > concept_names.txt
 
