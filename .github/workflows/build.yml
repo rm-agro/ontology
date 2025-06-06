@@ -1,5 +1,4 @@
 name: Build Linked Data Exports
-
 on:
   push:
     branches:
@@ -12,48 +11,51 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Convert TTL to all formats
+    - name: Install Apache Jena (for all conversions)
       run: |
-        mkdir -p dist/full
+        # Try multiple mirrors with retry logic
+        for mirror in \
+          "https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz" \
+          "https://archive.apache.org/dist/jena/binaries/apache-jena-5.3.0.tar.gz" \
+          "https://www.apache.org/dyn/closer.lua/jena/binaries/apache-jena-5.3.0.tar.gz?action=download"; do
+          echo "Trying to download from: $mirror"
+          if wget --timeout=30 --tries=3 "$mirror" -O apache-jena-5.3.0.tar.gz; then
+            echo "Download successful from: $mirror"
+            break
+          else
+            echo "Failed to download from: $mirror"
+          fi
+        done
         
-        # Convert the full ontology to different formats
-        echo "Converting full ontology.ttl to RDF/XML"
-        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=RDF/XML /data/ontology.ttl > dist/full/ontology.rdf
+        if [ ! -f apache-jena-5.3.0.tar.gz ]; then
+          echo "All download attempts failed"
+          exit 1
+        fi
         
-        echo "Converting full ontology.ttl to JSON-LD"
-        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=JSON-LD /data/ontology.ttl > dist/full/ontology.jsonld
-        
-        echo "Converting full ontology.ttl to N-Triples"
-        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples /data/ontology.ttl > dist/full/ontology.nt
-        
-        echo "Converting full ontology.ttl to N3"
-        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N3 /data/ontology.ttl > dist/full/ontology.n3
-        
-        echo "Conversion complete. Generated files:"
-        find dist/ -name "*.ttl" -o -name "*.rdf" -o -name "*.jsonld" -o -name "*.nt" | sort
-    
+        tar -xzf apache-jena-5.3.0.tar.gz
+    - name: Convert TTL to all formats (using Apache Jena riot)
+      run: |
+        mkdir -p dist
+        echo "Converting ontology.ttl to RDF/XML"
+        ./apache-jena-5.3.0/bin/riot --output=RDF/XML ontology.ttl > dist/ontology.rdf
+        echo "Converting ontology.ttl to JSON-LD"
+        ./apache-jena-5.3.0/bin/riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
+        echo "Converting ontology.ttl to N-Triples"
+        ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl > dist/ontology.nt
+        echo "Converting ontology.ttl to N3"
+        ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/ontology.n3
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: linked-data-exports
         path: dist
-    
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v5
+    - name: Commit dist folder to repository
+      uses: EndBug/add-and-commit@v9
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: 'Update Linked Data exports'
-        title: 'Auto-update: Linked Data exports'
-        body: |
-          Automated update of Linked Data exports:
-          - ontology.rdf (RDF/XML)
-          - ontology.jsonld (JSON-LD) 
-          - ontology.nt (N-Triples)
-          - ontology.n3 (N3)
-        branch: update-linked-data-exports
-        delete-branch: true
+        author_name: GitHub Actions
+        author_email: actions@github.com
+        message: 'Update Linked Data exports'
+        add: 'dist/*'
