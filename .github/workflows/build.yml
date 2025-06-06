@@ -59,8 +59,8 @@ jobs:
         # Install ROBOT
         wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
 
-        # Create ROBOT SPARQL query to extract classes
-        cat > get-classes.rq << 'SPARQL_EOF'
+        # Create ROBOT SPARQL query to extract classes (safe with echo)
+        echo '
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -70,7 +70,7 @@ SELECT DISTINCT ?class WHERE {
   { ?class rdfs:subClassOf* owl:Thing }
   FILTER(STRSTARTS(STR(?class), "https://rmagro.org/ontology/"))
 }
-SPARQL_EOF
+' > get-classes.rq
 
         # Run ROBOT query → output CSV
         java -jar robot.jar query \
