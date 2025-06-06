@@ -17,102 +17,49 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Install Apache Jena (for all conversions)
+    - name: Install Apache Jena and ROBOT
       run: |
-        # Try multiple mirrors with retry logic
-        for mirror in \
-          "https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz" \
-          "https://archive.apache.org/dist/jena/binaries/apache-jena-5.3.0.tar.gz" \
-          "https://www.apache.org/dyn/closer.lua/jena/binaries/apache-jena-5.3.0.tar.gz?action=download"; do
-          echo "Trying to download from: $mirror"
-          if wget --timeout=30 --tries=3 "$mirror" -O apache-jena-5.3.0.tar.gz; then
-            echo "Download successful from: $mirror"
-            break
-          else
-            echo "Failed to download from: $mirror"
-          fi
-        done
-
-        if [ ! -f apache-jena-5.3.0.tar.gz ]; then
-          echo "All download attempts failed"
-          exit 1
-        fi
-
-        tar -xzf apache-jena-5.3.0.tar.gz
+        wget -O apache-jena.tar.gz https://downloads.apache.org/jena/binaries/apache-jena-5.3.0.tar.gz
+        tar -xzf apache-jena.tar.gz
+        wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
 
     - name: Convert TTL to all formats (using Apache Jena riot)
       run: |
         mkdir -p dist/full
-        echo "Converting ontology.ttl to RDF/XML"
         ./apache-jena-5.3.0/bin/riot --output=RDF/XML ontology.ttl > dist/full/ontology.rdf
-        echo "Converting ontology.ttl to JSON-LD"
         ./apache-jena-5.3.0/bin/riot --output=JSON-LD ontology.ttl > dist/full/ontology.jsonld
-        echo "Converting ontology.ttl to N-Triples"
         ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl > dist/full/ontology.nt
-        echo "Converting ontology.ttl to N3"
         ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/full/ontology.n3
 
-    - name: Extract individual concepts using ROBOT query and convert formats
+    - name: Extract concepts and convert formats
       run: |
         mkdir -p dist/concepts
 
-        # Install ROBOT
-        wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
-
-        # Create ROBOT SPARQL query to extract classes (safe with echo)
-        echo '
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?class WHERE {
-  { ?class a owl:Class }
-  UNION
-  { ?class rdfs:subClassOf* owl:Thing }
-  FILTER(STRSTARTS(STR(?class), "https://rmagro.org/ontology/"))
-}
-' > get-classes.rq
-
-        # Run ROBOT query → output CSV
         java -jar robot.jar query \
           --input ontology.ttl \
-          --query get-classes.rq \
+          --query queries/get-classes.rq \
           --csv class_list.csv
 
-        # Process class_list.csv → generate concept_names.txt
         tail -n +2 class_list.csv | sed 's|https://rmagro.org/ontology/||' > concept_names.txt
-
-        echo "Found concepts:"
         cat concept_names.txt
 
-        # Extract each concept with ROBOT and convert formats
-        while IFS= read -r concept; do
-          if [ ! -z "$concept" ]; then
-            echo "Processing concept: $concept"
+        for concept in $(cat concept_names.txt); do
+          echo "Processing concept: $concept"
+          echo "https://rmagro.org/ontology/$concept" > temp_concept.txt
 
-            # Prepare term file
-            echo "https://rmagro.org/ontology/$concept" > temp_concept.txt
+          java -jar robot.jar extract \
+            --input ontology.ttl \
+            --method STAR \
+            --term-file temp_concept.txt \
+            --output "dist/concepts/${concept}.ttl" \
+            --format turtle
 
-            # Extract with ROBOT
-            java -jar robot.jar extract \
-              --input ontology.ttl \
-              --method STAR \
-              --term-file temp_concept.txt \
-              --output "dist/concepts/${concept}.ttl" \
-              --format turtle
+          ./apache-jena-5.3.0/bin/riot --output=RDF/XML "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.rdf"
+          ./apache-jena-5.3.0/bin/riot --output=JSON-LD "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.jsonld"
+          ./apache-jena-5.3.0/bin/riot --output=N-Triples "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.nt"
 
-            # Convert to RDF/XML
-            ./apache-jena-5.3.0/bin/riot --output=RDF/XML "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.rdf"
-
-            # Convert to JSON-LD
-            ./apache-jena-5.3.0/bin/riot --output=JSON-LD "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.jsonld"
-
-            # Convert to N-Triples
-            ./apache-jena-5.3.0/bin/riot --output=N-Triples "dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.nt"
-
-            # Cleanup
-            rm -f temp_concept.txt
-          fi
-        done < concept_names.txt
+          rm temp_concept.txt
+        done
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
