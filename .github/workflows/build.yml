@@ -66,26 +66,36 @@ jobs:
             # If ROBOT extraction failed, try a simpler SPARQL-based approach
             if [ ! -f "dist/concepts/${concept}.ttl" ] || [ ! -s "dist/concepts/${concept}.ttl" ]; then
               echo "Trying alternative extraction for $concept..."
-              docker run --rm -v $(pwd):/data stain/jena:latest sparql \
-                --data /data/ontology.ttl \
-                --query <(cat << EOF
+              
+              # Create SPARQL query file
+              cat > temp_query.rq << 'SPARQL_EOF'
 PREFIX rmagro: <https://rmagro.org/ontology/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 CONSTRUCT {
-  rmagro:$concept ?p ?o .
-  ?s ?p2 rmagro:$concept .
+  rmagro:CONCEPT_PLACEHOLDER ?p ?o .
+  ?s ?p2 rmagro:CONCEPT_PLACEHOLDER .
 } WHERE {
   {
-    rmagro:$concept ?p ?o .
+    rmagro:CONCEPT_PLACEHOLDER ?p ?o .
   } UNION {
-    ?s ?p2 rmagro:$concept .
+    ?s ?p2 rmagro:CONCEPT_PLACEHOLDER .
   }
 }
-EOF
-) --results turtle > "dist/concepts/${concept}.ttl" 2>/dev/null || echo "SPARQL extraction also failed for $concept"
+SPARQL_EOF
+              
+              # Replace placeholder with actual concept
+              sed "s/CONCEPT_PLACEHOLDER/$concept/g" temp_query.rq > concept_query.rq
+              
+              docker run --rm -v $(pwd):/data stain/jena:latest sparql \
+                --data /data/ontology.ttl \
+                --query /data/concept_query.rq \
+                --results turtle > "dist/concepts/${concept}.ttl" 2>/dev/null || echo "SPARQL extraction also failed for $concept"
+              
+              # Cleanup query files
+              rm -f temp_query.rq concept_query.rq
             fi
             
             # Convert to other formats if extraction succeeded
