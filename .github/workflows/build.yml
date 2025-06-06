@@ -52,19 +52,34 @@ jobs:
         echo "Converting ontology.ttl to N3"
         ./apache-jena-5.3.0/bin/riot --output=N3 ontology.ttl > dist/full/ontology.n3
 
-    - name: Extract individual concepts and convert formats
+    - name: Extract individual concepts using ROBOT query and convert formats
       run: |
         mkdir -p dist/concepts
 
         # Install ROBOT
         wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
 
-        # Extract concept names
-        echo "Extracting concept names..."
-        ./apache-jena-5.3.0/bin/riot --output=N-Triples ontology.ttl | \
-        grep "rdf:type.*owl:Class" | \
-        grep -o '<https://rmagro\.org/ontology/[^>]*>' | \
-        sed 's|<https://rmagro\.org/ontology/||;s|>||' > concept_names.txt
+        # Create ROBOT SPARQL query to extract classes
+        cat > get-classes.rq << 'SPARQL_EOF'
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?class WHERE {
+  { ?class a owl:Class }
+  UNION
+  { ?class rdfs:subClassOf* owl:Thing }
+  FILTER(STRSTARTS(STR(?class), "https://rmagro.org/ontology/"))
+}
+SPARQL_EOF
+
+        # Run ROBOT query → output CSV
+        java -jar robot.jar query \
+          --input ontology.ttl \
+          --query get-classes.rq \
+          --csv class_list.csv
+
+        # Process class_list.csv → generate concept_names.txt
+        tail -n +2 class_list.csv | sed 's|https://rmagro.org/ontology/||' > concept_names.txt
 
         echo "Found concepts:"
         cat concept_names.txt
