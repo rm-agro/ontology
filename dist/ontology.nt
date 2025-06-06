@@ -163,20 +163,20 @@
 <https://rmagro.org/ontology/Crop> <http://www.w3.org/2004/02/skos/core#definition> "The production of plant species for particular purposes and under specified conditions."@en .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Plot> .
-_:B5f6e78f95eb483eafff2a710fc58e36a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B5f6e78f95eb483eafff2a710fc58e36a <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/grows> .
-_:B5f6e78f95eb483eafff2a710fc58e36a <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/ProductionUnit> .
-<https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B5f6e78f95eb483eafff2a710fc58e36a .
+_:Bea2b189659d8ee0a3574195b32ea8bed <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bea2b189659d8ee0a3574195b32ea8bed <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/grows> .
+_:Bea2b189659d8ee0a3574195b32ea8bed <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/ProductionUnit> .
+<https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bea2b189659d8ee0a3574195b32ea8bed .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#comment> "The surface of the CropField is always within the borders of a Field. \n\nAs a CropProductionUnit applies to only one CropClass, a CropField is grown by one CropClass.\n\nIt is the farmer who decides when to split up to different CropFields. That can be a different Variety, a different purpose for which the crop is grown, a different class in seed production, the need to keep it separate for tracking and tracing purposes etc."@en .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#label> "CropField"@en .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/2000/01/rdf-schema#label> "Gewasperceel"@nl .
 <https://rmagro.org/ontology/CropField> <http://www.w3.org/2004/02/skos/core#definition> "CropField describes the continuous surface of land which is used during a period of time by a certain CropProductionUnit."@en .
 <https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Crop> .
-_:B23888790d8a845586a79b7f91882c4e6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B23888790d8a845586a79b7f91882c4e6 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:B23888790d8a845586a79b7f91882c4e6 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B23888790d8a845586a79b7f91882c4e6 .
+_:B5be68f90d195f5c247fd90aa25fbd7f4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B5be68f90d195f5c247fd90aa25fbd7f4 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:B5be68f90d195f5c247fd90aa25fbd7f4 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B5be68f90d195f5c247fd90aa25fbd7f4 .
 <https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#comment> "Remark.\nThe purpose/target/objective indicates the post harvest use of the crop. It might have consequences for the use of crop protection products and the operation technique for harvesting.\nrmagro\nExample\nPotatoes can be grown for starch, consumption (Which might be further specified as for french fries, chips, table potatoes, ....) or seed.\n\nMaize (Corn) can be grown for fresh cobs, cob/mix, silage or grain.\n\nTo be discussed: \nThis implies that when a CropClass which is grown on one continuous plot is grown for different CropProductionPurpose's this plot must be separated in different CropFields."@en .
 <https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#label> "CropProductionPurpose"@en .
 <https://rmagro.org/ontology/CropProductionPurpose> <http://www.w3.org/2000/01/rdf-schema#label> "Teeltdoel"@nl .
@@ -187,10 +187,10 @@ _:B23888790d8a845586a79b7f91882c4e6 <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/CropProductionSequence> <http://www.w3.org/2004/02/skos/core#definition> "Describes the sequence within one growing season; indicates whether the crop is  a preceding crop, the main crop or a succeeding crop." .
 <https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Operation> .
-_:B11ca5b4ba16aa18ea3c9383273be305f <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B11ca5b4ba16aa18ea3c9383273be305f <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:B11ca5b4ba16aa18ea3c9383273be305f <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B11ca5b4ba16aa18ea3c9383273be305f .
+_:B91933fd7deb66f76254645270c0d912d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B91933fd7deb66f76254645270c0d912d <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:B91933fd7deb66f76254645270c0d912d <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B91933fd7deb66f76254645270c0d912d .
 <https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2000/01/rdf-schema#comment> "The CulturalPractice does not describe the means by which the activities are performed. The means is described by OperationTechnique. For example primary soil tillage can be done with chisel plowing or with moldboard ploughing. Harvesting will include the harvesting process itself, but also the required transport."@en .
 <https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2000/01/rdf-schema#label> "CulturalPractice"@en .
 <https://rmagro.org/ontology/CulturalPractice> <http://www.w3.org/2004/02/skos/core#definition> "A CulturalPractice describes one or series of Operations to realize an objective in crop production. Examples are primary soil tillage, planting, harvesting, etc."@en .
@@ -213,10 +213,10 @@ _:B11ca5b4ba16aa18ea3c9383273be305f <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/Field> <http://www.w3.org/2004/02/skos/core#definition> "Field is a continuous piece of land, bound by topographical objects like roads, ditches, stone walls, wooded banks, farm yards, etc. and by land of another owner or operator of that land."@en .
 <https://rmagro.org/ontology/Operation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#Concept> .
-_:B8b52471fac7109362c8f8a64cebe91d0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B8b52471fac7109362c8f8a64cebe91d0 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
-_:B8b52471fac7109362c8f8a64cebe91d0 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
-<https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B8b52471fac7109362c8f8a64cebe91d0 .
+_:Bd7339a3147570d346ddfeedc539f419a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bd7339a3147570d346ddfeedc539f419a <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
+_:Bd7339a3147570d346ddfeedc539f419a <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
+<https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bd7339a3147570d346ddfeedc539f419a .
 <https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#comment> "Remarks for CropPrduction.\nIn the planning stage an Operation is planned for a CropField. when assigned to a Task, it will be valid for an ActivityField. \n\nA measurement with a sensor system or soil sampling can also be called an Operation.\n\nExamples for CropProduction:\nThe CulturalPractise weed control can be realized by one of various OperationTechnique's like spraying, row cultivation, manual hoeing, etc.\n\nExamples for AnimalHusbandry:\nTo be specified"@en .
 <https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#label> "Operation"@en .
 <https://rmagro.org/ontology/Operation> <http://www.w3.org/2000/01/rdf-schema#label> "Teelt handeling"@nl .
@@ -246,14 +246,14 @@ _:B8b52471fac7109362c8f8a64cebe91d0 <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/PlantProtectionProductUseCondition> <http://www.w3.org/2004/02/skos/core#definition> "The condition/terms under which the Authorisation of a Biocide is valid"@en .
 <https://rmagro.org/ontology/Plot> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#Concept> .
-_:Bebdbc2d6e4bd544445c11208ea2e717f <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:Bebdbc2d6e4bd544445c11208ea2e717f <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/BeginDate> .
-_:Bebdbc2d6e4bd544445c11208ea2e717f <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTime> .
-<https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bebdbc2d6e4bd544445c11208ea2e717f .
-_:B6a043ea9632be93c267b74527ff7a969 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B6a043ea9632be93c267b74527ff7a969 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/EndDate> .
-_:B6a043ea9632be93c267b74527ff7a969 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTime> .
-<https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B6a043ea9632be93c267b74527ff7a969 .
+_:B74c91b5b7ffa7b5da868bfe584bc4c24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B74c91b5b7ffa7b5da868bfe584bc4c24 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/BeginDate> .
+_:B74c91b5b7ffa7b5da868bfe584bc4c24 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B74c91b5b7ffa7b5da868bfe584bc4c24 .
+_:B7728148d36bfbacd79eee4edb24f3911 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B7728148d36bfbacd79eee4edb24f3911 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/EndDate> .
+_:B7728148d36bfbacd79eee4edb24f3911 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTime> .
+<https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B7728148d36bfbacd79eee4edb24f3911 .
 <https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#comment> "Different types of growing surfaces are:\n- Field\n- CropField\n- ActivityField\n- CadastralField\n- ExperimentalPlot\n- Greenhouse"@en .
 <https://rmagro.org/ontology/Plot> <http://www.w3.org/2000/01/rdf-schema#label> "Plot"@en .
 <https://rmagro.org/ontology/Plot> <http://www.w3.org/2004/02/skos/core#definition> "Abstract object that holds the common attributes of the different types of Growing surfaces. A Plot is a continuous surface."@en .
@@ -269,14 +269,14 @@ _:B6a043ea9632be93c267b74527ff7a969 <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/ProduceAllocation> <http://www.w3.org/2004/02/skos/core#definition> "A ProduceAllocation describes which amount of Produce is transferred from a source to a destination."@en .
 <https://rmagro.org/ontology/Product> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#Concept> .
-_:B94573fce0ea8a1322712ef6c14dd4ffc <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B94573fce0ea8a1322712ef6c14dd4ffc <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:B94573fce0ea8a1322712ef6c14dd4ffc <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B94573fce0ea8a1322712ef6c14dd4ffc .
-_:Bcaf665aea44e25767942627858b99abd <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:Bcaf665aea44e25767942627858b99abd <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
-_:Bcaf665aea44e25767942627858b99abd <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
-<https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bcaf665aea44e25767942627858b99abd .
+_:B20be0a21dcf446ade4adbce6bd0ddb97 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B20be0a21dcf446ade4adbce6bd0ddb97 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:B20be0a21dcf446ade4adbce6bd0ddb97 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B20be0a21dcf446ade4adbce6bd0ddb97 .
+_:B580346aff8a4e027fef45a70863aff86 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B580346aff8a4e027fef45a70863aff86 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
+_:B580346aff8a4e027fef45a70863aff86 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
+<https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B580346aff8a4e027fef45a70863aff86 .
 <https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#comment> "Examples:\n- Kalkamonsalpeter\n- Water\n- NPK 17-17-17"@en .
 <https://rmagro.org/ontology/Product> <http://www.w3.org/2000/01/rdf-schema#label> "Product"@en .
 <https://rmagro.org/ontology/Product> <http://www.w3.org/2004/02/skos/core#definition> "Product is what is used as input for agricultural production."@en .
@@ -296,22 +296,22 @@ _:Bcaf665aea44e25767942627858b99abd <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/ProductionPeriod> <http://www.w3.org/2004/02/skos/core#definition> "The period, season, in which a CropSpecies can be grown and a CropField is grown."@en .
 <https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Crop> .
-_:B62dae822f42a4889b9b4f1f56ff6f458 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B62dae822f42a4889b9b4f1f56ff6f458 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/GrownDuring> .
-_:B62dae822f42a4889b9b4f1f56ff6f458 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/ProductionPeriod> .
-<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B62dae822f42a4889b9b4f1f56ff6f458 .
-_:B5c6a92172649082249efa0b3f35143d4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B5c6a92172649082249efa0b3f35143d4 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/GrownOnA> .
-_:B5c6a92172649082249efa0b3f35143d4 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CropField> .
-<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B5c6a92172649082249efa0b3f35143d4 .
-_:B857ddfaffc7a183d52dd1eb1f2565733 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B857ddfaffc7a183d52dd1eb1f2565733 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
-_:B857ddfaffc7a183d52dd1eb1f2565733 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CropProductionPurpose> .
-<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B857ddfaffc7a183d52dd1eb1f2565733 .
-_:B0000442d0aa2bd784b176c739e11772c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B0000442d0aa2bd784b176c739e11772c <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
-_:B0000442d0aa2bd784b176c739e11772c <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/Variety> .
-<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B0000442d0aa2bd784b176c739e11772c .
+_:B6bc5699b2e92c89a1e8a360ebaf9e3db <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B6bc5699b2e92c89a1e8a360ebaf9e3db <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/GrownDuring> .
+_:B6bc5699b2e92c89a1e8a360ebaf9e3db <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/ProductionPeriod> .
+<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B6bc5699b2e92c89a1e8a360ebaf9e3db .
+_:Bc1978f6ba8f5c0f5ac40be9047738511 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bc1978f6ba8f5c0f5ac40be9047738511 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/GrownOnA> .
+_:Bc1978f6ba8f5c0f5ac40be9047738511 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CropField> .
+<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bc1978f6ba8f5c0f5ac40be9047738511 .
+_:B8aed6523809fae5fd64f36f3eee99dce <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B8aed6523809fae5fd64f36f3eee99dce <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
+_:B8aed6523809fae5fd64f36f3eee99dce <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CropProductionPurpose> .
+<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B8aed6523809fae5fd64f36f3eee99dce .
+_:B561ca33b7a0b1276cb2cd6fc531c638c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B561ca33b7a0b1276cb2cd6fc531c638c <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
+_:B561ca33b7a0b1276cb2cd6fc531c638c <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/Variety> .
+<https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B561ca33b7a0b1276cb2cd6fc531c638c .
 <https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#comment> "Reasons to separate the same CropClass in different CropProductionUnit's are determined by the farm enterprise. In many cases a different variety will lead to different CropProductionUnit's, but also the purpose for which crops are grown can be a reason ( seed production versus consumption) or in case of seed production the differences in classification can be a reason.\n\nCropField is  used to specify the time period during which the CropProductionUnit occupies a certain area of a Field and the status (planned, realised, ...) .\n\nOperations are planned and executed on an ActivityField which can be the same surface as a CropField, but also a combination of more CropFields or only a part of a CropField.\n\nActivities on a CropProductionUnit can also include those which are not executed on a ActivityField like sorting of planting material and storage of the Produce. \n\nAn organisation can decide to start and stop the CropProductionUnit when field activities start and finish, and see Batches of Product (the seed) or Produce (what is harvested) as a unit of production"@en .
 <https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2000/01/rdf-schema#label> "CropProductionUnit"@en .
 <https://rmagro.org/ontology/ProductionUnit> <http://www.w3.org/2004/02/skos/core#definition> "The cultivation of one CropClass on one or more CropField's which is seen by the Farm enterprise as one unit of production which should be distinguished from other CropProductionUnits's."@en .
@@ -327,46 +327,46 @@ _:B0000442d0aa2bd784b176c739e11772c <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/RelativeTiming> <http://www.w3.org/2004/02/skos/core#definition> "The timing of an operation in respect of a reference."@en .
 <https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Product> .
-_:B438797326e87e4dc71545487e5090263 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B438797326e87e4dc71545487e5090263 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
-_:B438797326e87e4dc71545487e5090263 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/Variety> .
-<https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B438797326e87e4dc71545487e5090263 .
+_:Bbb1354021bbdc29ac0b0b149a7c01f45 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bbb1354021bbdc29ac0b0b149a7c01f45 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/has> .
+_:Bbb1354021bbdc29ac0b0b149a7c01f45 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/Variety> .
+<https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bbb1354021bbdc29ac0b0b149a7c01f45 .
 <https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/2000/01/rdf-schema#label> "SeedAndPropagationMaterial"@en .
 <https://rmagro.org/ontology/SeedAndPropagationMaterial> <http://www.w3.org/2004/02/skos/core#definition> "Propagating part of a plant such as seed, tubers, spore, etc."@en .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Crop> .
-_:Bf49fba94e1709b7e8223e05a7bbb124f <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:Bf49fba94e1709b7e8223e05a7bbb124f <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:Bf49fba94e1709b7e8223e05a7bbb124f <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bf49fba94e1709b7e8223e05a7bbb124f .
+_:Be938fde743a29cc2532ea98e88826a61 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Be938fde743a29cc2532ea98e88826a61 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:Be938fde743a29cc2532ea98e88826a61 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Be938fde743a29cc2532ea98e88826a61 .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#comment> "PlantSpecies is a specific plant in the Plant Genus. the latter is a group of related plants."@en .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#label> "Gewasssoort"@nl .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/2000/01/rdf-schema#label> "Species"@en .
 <https://rmagro.org/ontology/Species> <http://www.w3.org/2004/02/skos/core#definition> "A PlantSpecies is the basic unit of classification in the Lineus taxonomic classification system."@en .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#Concept> .
-_:Bc91e096fbc93eb9974849be234dd6785 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:Bc91e096fbc93eb9974849be234dd6785 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
-_:Bc91e096fbc93eb9974849be234dd6785 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
-<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bc91e096fbc93eb9974849be234dd6785 .
-_:B0bc44df35fde7c5e21b64fe949d5d477 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B0bc44df35fde7c5e21b64fe949d5d477 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/EarliestBeginTime> .
-_:B0bc44df35fde7c5e21b64fe949d5d477 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
-<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B0bc44df35fde7c5e21b64fe949d5d477 .
-_:B6e5df8558fc445b6ecdb088f884c13c0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B6e5df8558fc445b6ecdb088f884c13c0 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/LatestEndTime> .
-_:B6e5df8558fc445b6ecdb088f884c13c0 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
-<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B6e5df8558fc445b6ecdb088f884c13c0 .
+_:B7f29fab978de2b366b9473458ce234e9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B7f29fab978de2b366b9473458ce234e9 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/Designator> .
+_:B7f29fab978de2b366b9473458ce234e9 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#string> .
+<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B7f29fab978de2b366b9473458ce234e9 .
+_:Bba13c5503fade009fbfa3c3bf296b87e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bba13c5503fade009fbfa3c3bf296b87e <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/EarliestBeginTime> .
+_:Bba13c5503fade009fbfa3c3bf296b87e <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bba13c5503fade009fbfa3c3bf296b87e .
+_:Bddadc404967350d3dfaaaf8c938e1172 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bddadc404967350d3dfaaaf8c938e1172 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/LatestEndTime> .
+_:Bddadc404967350d3dfaaaf8c938e1172 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2001/XMLSchema#dateTimeStamp> .
+<https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bddadc404967350d3dfaaaf8c938e1172 .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#comment> "An Operation can be executed by more Tasks.(See example). Therefore, there is a many to many relation between Task and Operation." .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#comment> "Example.\nThere is one Task \"Harrowing and Drilling\", which performs two Operation's; one is \"Harrowing\" and the other is \"Drilling\".\nOn the other hand, there can be two Task's that realize one Operation. For example two combines harvesting on one ActivityField." .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/2000/01/rdf-schema#label> "Task"@en .
 <https://rmagro.org/ontology/Task> <http://www.w3.org/2004/02/skos/core#definition> "A Task is the execution of one or more Operation's." .
 <https://rmagro.org/ontology/TaskStatusCode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/TaskStatusCode> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Task> .
-_:B18211b740c68bcfb2d39a00e8fb8df3d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B18211b740c68bcfb2d39a00e8fb8df3d <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:B18211b740c68bcfb2d39a00e8fb8df3d <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/TaskStatusCode> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B18211b740c68bcfb2d39a00e8fb8df3d .
+_:Bacde38a923bf99466684b6fa0b3de8a8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:Bacde38a923bf99466684b6fa0b3de8a8 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:Bacde38a923bf99466684b6fa0b3de8a8 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/TaskStatusCode> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:Bacde38a923bf99466684b6fa0b3de8a8 .
 <https://rmagro.org/ontology/TaskStatusCode> <http://www.w3.org/2000/01/rdf-schema#label> "TaskStatusCode"@en .
 <https://rmagro.org/ontology/TreatmeantZone> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/TreatmeantZone> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Zone> .
@@ -375,10 +375,10 @@ _:B18211b740c68bcfb2d39a00e8fb8df3d <http://www.w3.org/2002/07/owl#someValuesFro
 <https://rmagro.org/ontology/TreatmeantZone> <http://www.w3.org/2004/02/skos/core#definition> "A TreatmentZone defines a surface in a CropField or ActivityField, which gets a uniform treatment in that surface by an Operation. A TreatmentZone is described by a MultiSurface."@en .
 <https://rmagro.org/ontology/Variety> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://rmagro.org/ontology/Crop> .
-_:B17abe681029813005f2a668d8bf6c0fb <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
-_:B17abe681029813005f2a668d8bf6c0fb <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
-_:B17abe681029813005f2a668d8bf6c0fb <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
-<https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B17abe681029813005f2a668d8bf6c0fb .
+_:B195993817e1d3dc1a071d0213ec050e2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:B195993817e1d3dc1a071d0213ec050e2 <http://www.w3.org/2002/07/owl#onProperty> <https://rmagro.org/ontology/IsSpecifiedInCodelist> .
+_:B195993817e1d3dc1a071d0213ec050e2 <http://www.w3.org/2002/07/owl#someValuesFrom> <https://rmagro.org/ontology/CodeLists> .
+<https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:B195993817e1d3dc1a071d0213ec050e2 .
 <https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#comment> "Recognition of a cultivated plant (a cultivar) as a variety in this particular sense provides its breeder with some legal protection, so-called plant breeders' rights, depending to some extent on the internal legislation of the UPOV signatory countries, such as the Plant Variety Protection Act in the US. (Source: Wikipedia)"@en .
 <https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#label> "Ras"@nl .
 <https://rmagro.org/ontology/Variety> <http://www.w3.org/2000/01/rdf-schema#label> "Variety"@en .

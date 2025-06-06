@@ -41,6 +41,16 @@ Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijk
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/CodeLists"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/Variety"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Task">
     <skos:definition>A Task is the execution of one or more Operation's.</skos:definition>
     <rdfs:label xml:lang="en">Task</rdfs:label>
@@ -48,9 +58,9 @@ Meststof (of kunstmest) is elk organisch of anorganisch materiaal van natuurlijk
 There is one Task "Harrowing and Drilling", which performs two Operation's; one is "Harrowing" and the other is "Drilling".
 On the other hand, there can be two Task's that realize one Operation. For example two combines harvesting on one ActivityField.</rdfs:comment>
     <rdfs:comment>An Operation can be executed by more Tasks.(See example). Therefore, there is a many to many relation between Task and Operation.</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A0"/>
-    <rdfs:subClassOf rdf:nodeID="A1"/>
     <rdfs:subClassOf rdf:nodeID="A2"/>
+    <rdfs:subClassOf rdf:nodeID="A3"/>
+    <rdfs:subClassOf rdf:nodeID="A4"/>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -74,28 +84,13 @@ On the other hand, there can be two Task's that realize one Operation. For examp
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A3">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/CulturalPractice">
     <skos:definition xml:lang="en">A CulturalPractice describes one or series of Operations to realize an objective in crop production. Examples are primary soil tillage, planting, harvesting, etc.</skos:definition>
     <rdfs:label xml:lang="en">CulturalPractice</rdfs:label>
     <rdfs:comment xml:lang="en">The CulturalPractice does not describe the means by which the activities are performed. The means is described by OperationTechnique. For example primary soil tillage can be done with chisel plowing or with moldboard ploughing. Harvesting will include the harvesting process itself, but also the required transport.</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A4"/>
+    <rdfs:subClassOf rdf:nodeID="A5"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Operation"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A5">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A6">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CropField"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/GrownOnA"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Product">
     <skos:definition xml:lang="en">Product is what is used as input for agricultural production.</skos:definition>
@@ -104,8 +99,8 @@ On the other hand, there can be two Task's that realize one Operation. For examp
 - Kalkamonsalpeter
 - Water
 - NPK 17-17-17</rdfs:comment>
+    <rdfs:subClassOf rdf:nodeID="A6"/>
     <rdfs:subClassOf rdf:nodeID="A7"/>
-    <rdfs:subClassOf rdf:nodeID="A8"/>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -122,9 +117,9 @@ Artikel 1 Kadasterwet.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Plot"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A9">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/EndDate"/>
+  <rdf:Description rdf:nodeID="A8">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CropField"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/GrownOnA"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/ProduceAllocation">
@@ -145,6 +140,11 @@ The allocation is an amount of Produce (tomatoes) collected from a HarvestingZon
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Allocation"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A9">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/Variety"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/PropertyZone">
     <skos:definition xml:lang="en">A PropertyZone defines a surface  which has a uniform PropertyValue, or a range of PropertyValues defined by a minimum and a maximum value for that property zone.  A PropertyZone is described by a MultiSurface. propertyZone is not restricted to the borders of a Field, CropField or ActivityField.</skos:definition>
     <rdfs:label xml:lang="en">PropertyZone</rdfs:label>
@@ -159,6 +159,16 @@ An example of a PropertyZone is a map of soil types which PropertyZones can exte
     <rdfs:label xml:lang="en">Person</rdfs:label>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Party"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A10">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/ProductionUnit"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/grows"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A11">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/BeginDate"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#date">
     <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
@@ -178,6 +188,11 @@ An example of a PropertyZone is a map of soil types which PropertyZones can exte
     <rdfs:comment xml:lang="en">The PropertyVariable defines a variable which can be measured by a sensor (Operation) , is the result of a (laboratory) analyses or the result of a calculation (DataProcess) . It can be used to describe properties of an Object. Objects can be Field, PartField, PropertyZone, VerticalLayer, (Batch of)Product,  (Batch of)Produce, etc.</rdfs:comment>
     <rdfs:comment xml:lang="en">Lists of PropertyVariables are maintained by a standardization organization. AgroConnect is such an organization and maintains lists for several PropertyCategory's. For Some Propertycategory's use is made of standards maintained by other standardization organizations like UN/CEFACT. These organizations are referenced in the PropertyCategory.</rdfs:comment>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A12">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/EndDate"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Zone">
     <skos:definition xml:lang="en">A Zone defines a surface in a CropField, ActivityField, AnimalHouse, or Greenhouse. A Zone is described by one or more Polygons and/or a collection of GridPoints.</skos:definition>
     <rdfs:label xml:lang="en">Zone</rdfs:label>
@@ -195,6 +210,11 @@ An example of a PropertyZone is a map of soil types which PropertyZones can exte
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A6">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/ProductAllocation">
     <skos:definition>A ProductAllocation describes which amount of a Product is transferred from a source to a destination.</skos:definition>
     <rdfs:label xml:lang="en">ProductAllocation</rdfs:label>
@@ -207,11 +227,6 @@ Example.
 The allocation can be an amount of Produce originating from a TreatmentZone ( tr1) during harvesting, which ends up in a grain tank on the harvester (the Batch batch 1). tr1 is the strips that are harvested for that grain-tank. This grain-tank load (batch 1) can be put in a trailer (batch 2). A next grain tank load (batch 3) harvested from the strips forming the next TreatmentZone tr2, can be added to the trailer ( still batch 2, now connected to two instances of Allocation). The trailer (batch 2) can be put in a grain storage (batch 4).</rdfs:comment>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Product"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A10">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/VerticalLayer">
     <skos:definition xml:lang="en">A VerticalLayer describes the vertical dimension, either downwards in the soil, or upwards in a crop canopy.</skos:definition>
@@ -245,7 +260,7 @@ The expression Vertical is added to prevent confusion with a map layer.</rdfs:co
   <rdf:Description rdf:about="https://rmagro.org/ontology/SeedAndPropagationMaterial">
     <skos:definition xml:lang="en">Propagating part of a plant such as seed, tubers, spore, etc.</skos:definition>
     <rdfs:label xml:lang="en">SeedAndPropagationMaterial</rdfs:label>
-    <rdfs:subClassOf rdf:nodeID="A11"/>
+    <rdfs:subClassOf rdf:nodeID="A9"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Product"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -259,9 +274,9 @@ The expression Vertical is added to prevent confusion with a map layer.</rdfs:co
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Crop"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A2">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
+  <rdf:Description rdf:nodeID="A7">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/PlantProtectionProduct">
@@ -284,11 +299,6 @@ checking or preventing undesired growth of plants, except algae.</rdfs:comment>
     <rdfs:domain rdf:resource="https://rmagro.org/ontology/TreatmeantZone"/>
     <rdfs:domain rdf:resource="https://rmagro.org/ontology/PropertyZone"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A11">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/Variety"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/isLocatedAt">
     <rdfs:label xml:lang="en">isLocatedAt</rdfs:label>
     <rdfs:range rdf:resource="https://rmagro.org/ontology/Farm"/>
@@ -307,6 +317,11 @@ checking or preventing undesired growth of plants, except algae.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Product"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A13">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CropProductionPurpose"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/ProductionUnit">
     <skos:definition xml:lang="en">The cultivation of one CropClass on one or more CropField's which is seen by the Farm enterprise as one unit of production which should be distinguished from other CropProductionUnits's.</skos:definition>
     <rdfs:label xml:lang="en">CropProductionUnit</rdfs:label>
@@ -319,9 +334,9 @@ Operations are planned and executed on an ActivityField which can be the same su
 Activities on a CropProductionUnit can also include those which are not executed on a ActivityField like sorting of planting material and storage of the Produce. 
 
 An organisation can decide to start and stop the CropProductionUnit when field activities start and finish, and see Batches of Product (the seed) or Produce (what is harvested) as a unit of production</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A12"/>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
     <rdfs:subClassOf rdf:nodeID="A13"/>
-    <rdfs:subClassOf rdf:nodeID="A6"/>
+    <rdfs:subClassOf rdf:nodeID="A8"/>
     <rdfs:subClassOf rdf:nodeID="A14"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Crop"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -336,8 +351,8 @@ An organisation can decide to start and stop the CropProductionUnit when field a
 - CadastralField
 - ExperimentalPlot
 - Greenhouse</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A9"/>
-    <rdfs:subClassOf rdf:nodeID="A15"/>
+    <rdfs:subClassOf rdf:nodeID="A12"/>
+    <rdfs:subClassOf rdf:nodeID="A11"/>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -356,6 +371,11 @@ When Relative Timing can be associated with other PropertyValues of the Property
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A15">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/GrownOnA">
     <rdfs:label xml:lang="en">grownOnA</rdfs:label>
@@ -376,13 +396,18 @@ When Relative Timing can be associated with other PropertyValues of the Property
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://rmagro.org/ontology/PropertyValue">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdf:Description rdf:nodeID="A14">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/ProductionPeriod"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/GrownDuring"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A4">
+  <rdf:Description rdf:nodeID="A16">
     <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
     <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://rmagro.org/ontology/PropertyValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/GrownDuring">
     <rdfs:label xml:lang="en">grownDuring</rdfs:label>
@@ -393,6 +418,11 @@ When Relative Timing can be associated with other PropertyValues of the Property
     <rdfs:range rdf:resource="https://rmagro.org/ontology/Operation"/>
     <rdfs:domain rdf:resource="https://rmagro.org/ontology/Task"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A4">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/dc/terms/modified">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
@@ -444,11 +474,6 @@ When Relative Timing can be associated with other PropertyValues of the Property
   <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#scopeNote">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A14">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/ProductionPeriod"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/GrownDuring"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Operation">
     <skos:definition xml:lang="en">An Operation performs a particular OperationTechnique on a particular CropField, ActivityField, CropProductionUnit, Batch, Animal or AnimalGroup  to realize a certain CulturalPractice or HusbandryPractise.</skos:definition>
     <rdfs:label xml:lang="nl">Teelt handeling</rdfs:label>
@@ -463,18 +488,18 @@ The CulturalPractise weed control can be realized by one of various OperationTec
 
 Examples for AnimalHusbandry:
 To be specified</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A16"/>
+    <rdfs:subClassOf rdf:nodeID="A1"/>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A12">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/Variety"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
+  <rdf:Description rdf:nodeID="A2">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/LatestEndTime"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/TaskStatusCode">
     <rdfs:label xml:lang="en">TaskStatusCode</rdfs:label>
-    <rdfs:subClassOf rdf:nodeID="A5"/>
+    <rdfs:subClassOf rdf:nodeID="A15"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Task"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -530,13 +555,13 @@ Can an Activity Field exist over more growing seasons? What should be the starti
     <rdfs:label xml:lang="en">Species</rdfs:label>
     <rdfs:label xml:lang="nl">Gewasssoort</rdfs:label>
     <rdfs:comment xml:lang="en">PlantSpecies is a specific plant in the Plant Genus. the latter is a group of related plants.</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A17"/>
+    <rdfs:subClassOf rdf:nodeID="A16"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Crop"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/LatestEndTime"/>
+  <rdf:Description rdf:nodeID="A5">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Allocation">
@@ -556,6 +581,11 @@ In case of delivery to a third party, the destination batch might be out of the 
 A whole Field can be used as CropField or as ActivityField, but a Field can also be split up in more CropField's or ActivityField's.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Plot"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A17">
+    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/PlantProtectionProductUseCondition">
     <skos:definition xml:lang="en">The condition/terms under which the Authorisation of a Biocide is valid</skos:definition>
@@ -598,11 +628,6 @@ An AgriculturalProductionOrganization can have also other agricultural productio
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/AgriculturalProductionOrganisation"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A13">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CropProductionPurpose"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/has"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/BeginDate">
     <rdfs:label xml:lang="en">BeginDate</rdfs:label>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
@@ -633,19 +658,9 @@ An AgriculturalProductionOrganization can have also other agricultural productio
 As a CropProductionUnit applies to only one CropClass, a CropField is grown by one CropClass.
 
 It is the farmer who decides when to split up to different CropFields. That can be a different Variety, a different purpose for which the crop is grown, a different class in seed production, the need to keep it separate for tracking and tracing purposes etc.</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A18"/>
+    <rdfs:subClassOf rdf:nodeID="A10"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Plot"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A18">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/ProductionUnit"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/grows"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A1">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/EarliestBeginTime"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/CropProductionPurpose">
     <skos:definition xml:lang="en">The purpose/target/objective for which the crop (of a particular CropClass) is grown on a CropField or as part of a CropProductionUnit.</skos:definition>
@@ -661,17 +676,12 @@ Maize (Corn) can be grown for fresh cobs, cob/mix, silage or grain.
 
 To be discussed: 
 This implies that when a CropClass which is grown on one continuous plot is grown for different CropProductionPurpose's this plot must be separated in different CropFields.</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A10"/>
+    <rdfs:subClassOf rdf:nodeID="A17"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Crop"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/dc/terms/created">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A7">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/AbsoluteTiming">
     <skos:definition xml:lang="en">A time period during which a particular Operation is planned to be, or was, executed following a certain specification.</skos:definition>
@@ -687,9 +697,14 @@ This implies that when a CropClass which is grown on one continuous plot is grow
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A17">
+  <rdf:Description rdf:nodeID="A18">
     <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
     <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    <owl:onProperty rdf:resource="https://rmagro.org/ontology/EarliestBeginTime"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/Variety">
@@ -697,7 +712,7 @@ This implies that when a CropClass which is grown on one continuous plot is grow
     <rdfs:label xml:lang="en">Variety</rdfs:label>
     <rdfs:label xml:lang="nl">Ras</rdfs:label>
     <rdfs:comment xml:lang="en">Recognition of a cultivated plant (a cultivar) as a variety in this particular sense provides its breeder with some legal protection, so-called plant breeders' rights, depending to some extent on the internal legislation of the UPOV signatory countries, such as the Plant Variety Protection Act in the US. (Source: Wikipedia)</rdfs:comment>
-    <rdfs:subClassOf rdf:nodeID="A3"/>
+    <rdfs:subClassOf rdf:nodeID="A18"/>
     <rdfs:subClassOf rdf:resource="https://rmagro.org/ontology/Crop"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
@@ -722,21 +737,6 @@ In case of a generic description (for example by means of a Recipe) how to assem
   </rdf:Description>
   <rdf:Description rdf:about="https://www.w3.org/2009/08/skos-reference/skos.html#Collection">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A15">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/BeginDate"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A8">
-    <owl:someValuesFrom rdf:resource="https://rmagro.org/ontology/CodeLists"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/IsSpecifiedInCodelist"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A16">
-    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <owl:onProperty rdf:resource="https://rmagro.org/ontology/Designator"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://rmagro.org/ontology/TreatmeantZone">
     <skos:definition xml:lang="en">A TreatmentZone defines a surface in a CropField or ActivityField, which gets a uniform treatment in that surface by an Operation. A TreatmentZone is described by a MultiSurface.</skos:definition>
