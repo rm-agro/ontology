@@ -1,4 +1,5 @@
 name: Build Linked Data Exports
+
 on:
   push:
     branches:
@@ -11,15 +12,16 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Convert TTL to all formats and extract individual concepts
+    - name: Convert TTL to all formats
       run: |
-        mkdir -p dist/full dist/concepts
+        mkdir -p dist/full
         
-        # First, convert the full ontology to different formats
+        # Convert the full ontology to different formats
         echo "Converting full ontology.ttl to RDF/XML"
         docker run --rm -v $(pwd):/data stain/jena:latest riot --output=RDF/XML /data/ontology.ttl > dist/full/ontology.rdf
         
@@ -32,89 +34,7 @@ jobs:
         echo "Converting full ontology.ttl to N3"
         docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N3 /data/ontology.ttl > dist/full/ontology.n3
         
-        # Install ROBOT tool
-        echo "Installing ROBOT tool"
-        wget -O robot.jar https://github.com/ontodev/robot/releases/latest/download/robot.jar
-        
-        # Extract all class names from the ontology
-        echo "Extracting concept names..."
-        docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples /data/ontology.ttl | \
-        grep "rdf:type.*owl:Class" | \
-        grep "rmagro:" | \
-        sed 's/<https:\/\/rmagro\.org\/ontology\/\([^>]*\)>.*/\1/' > concept_names.txt
-        
-        echo "Found concepts:"
-        cat concept_names.txt
-        
-        # For each concept, extract it with ROBOT
-        echo "Extracting individual concepts..."
-        while IFS= read -r concept; do
-          if [ ! -z "$concept" ] && [ "$concept" != "Batch" ]; then # Skip empty lines and avoid issues
-            echo "Processing concept: $concept"
-            
-            # Create temporary file with the concept IRI
-            echo "https://rmagro.org/ontology/$concept" > temp_concept.txt
-            
-            # Extract concept with ROBOT
-            java -jar robot.jar extract \
-              --input ontology.ttl \
-              --method STAR \
-              --term-file temp_concept.txt \
-              --output "dist/concepts/${concept}.ttl" \
-              --format turtle 2>/dev/null || echo "Failed to extract $concept with ROBOT"
-            
-            # If ROBOT extraction failed, try a simpler SPARQL-based approach
-            if [ ! -f "dist/concepts/${concept}.ttl" ] || [ ! -s "dist/concepts/${concept}.ttl" ]; then
-              echo "Trying alternative extraction for $concept..."
-              
-              # Create SPARQL query file
-              cat > temp_query.rq << 'EOF'
-PREFIX rmagro: <https://rmagro.org/ontology/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-
-CONSTRUCT {
-  rmagro:CONCEPT_PLACEHOLDER ?p ?o .
-  ?s ?p2 rmagro:CONCEPT_PLACEHOLDER .
-} WHERE {
-  {
-    rmagro:CONCEPT_PLACEHOLDER ?p ?o .
-  } UNION {
-    ?s ?p2 rmagro:CONCEPT_PLACEHOLDER .
-  }
-}
-EOF
-              
-              # Replace placeholder with actual concept
-              sed "s/CONCEPT_PLACEHOLDER/$concept/g" temp_query.rq > concept_query.rq
-              
-              docker run --rm -v $(pwd):/data stain/jena:latest sparql \
-                --data /data/ontology.ttl \
-                --query /data/concept_query.rq \
-                --results turtle > "dist/concepts/${concept}.ttl" 2>/dev/null || echo "SPARQL extraction also failed for $concept"
-              
-              # Cleanup query files
-              rm -f temp_query.rq concept_query.rq
-            fi
-            
-            # Convert to other formats if extraction succeeded
-            if [ -f "dist/concepts/${concept}.ttl" ] && [ -s "dist/concepts/${concept}.ttl" ]; then
-              echo "Converting $concept to other formats..."
-              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=RDF/XML "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.rdf" 2>/dev/null || echo "Failed RDF/XML for $concept"
-              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=JSON-LD "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.jsonld" 2>/dev/null || echo "Failed JSON-LD for $concept"
-              docker run --rm -v $(pwd):/data stain/jena:latest riot --output=N-Triples "/data/dist/concepts/${concept}.ttl" > "dist/concepts/${concept}.nt" 2>/dev/null || echo "Failed N-Triples for $concept"
-              echo "Successfully processed: $concept"
-            else
-              echo "No content extracted for: $concept"
-            fi
-            
-            # Cleanup
-            rm -f temp_concept.txt
-          fi
-        done < concept_names.txt
-        
-        echo "Extraction complete. Generated files:"
+        echo "Conversion complete. Generated files:"
         find dist/ -name "*.ttl" -o -name "*.rdf" -o -name "*.jsonld" -o -name "*.nt" | sort
     
     - name: Upload artifacts
