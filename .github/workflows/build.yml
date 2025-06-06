@@ -24,12 +24,9 @@ jobs:
       run: |
         curl -L https://github.com/ontodev/robot/releases/download/v1.9.4/robot.jar -o robot.jar
 
-    - name: Convert TTL to JSON-LD, RDF/XML, N-Triples, Notation3
+    - name: Convert TTL to RDF/XML, N-Triples, Notation3
       run: |
         mkdir -p dist
-
-        echo "Converting ontology.ttl to JSON-LD"
-        java -jar robot.jar convert --input ontology.ttl --format jsonld --output dist/ontology.jsonld
 
         echo "Converting ontology.ttl to RDF/XML"
         java -jar robot.jar convert --input ontology.ttl --format rdfxml --output dist/ontology.rdf
@@ -40,13 +37,24 @@ jobs:
         echo "Converting ontology.ttl to Notation3"
         java -jar robot.jar convert --input ontology.ttl --format n3 --output dist/ontology.n3
 
+    - name: Install Apache Jena (for JSON-LD conversion)
+      run: |
+        wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.10.0.tar.gz
+        tar -xzf apache-jena-4.10.0.tar.gz
+        export PATH=$PWD/apache-jena-4.10.0/bin:$PATH
+
+    - name: Convert TTL to JSON-LD (using Apache Jena riot)
+      run: |
+        export PATH=$PWD/apache-jena-4.10.0/bin:$PATH
+        mkdir -p dist
+        riot --output=JSON-LD ontology.ttl > dist/ontology.jsonld
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: linked-data-exports
         path: dist
 
-    # Optional: Commit dist folder back to main branch
     - name: Commit dist folder to repository
       uses: EndBug/add-and-commit@v9
       with:
