@@ -68,7 +68,7 @@ jobs:
               echo "Trying alternative extraction for $concept..."
               
               # Create SPARQL query file
-              cat > temp_query.rq << 'SPARQL_END'
+              cat > temp_query.rq << 'EOF'
 PREFIX rmagro: <https://rmagro.org/ontology/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -84,7 +84,7 @@ CONSTRUCT {
     ?s ?p2 rmagro:CONCEPT_PLACEHOLDER .
   }
 }
-SPARQL_END
+EOF
               
               # Replace placeholder with actual concept
               sed "s/CONCEPT_PLACEHOLDER/$concept/g" temp_query.rq > concept_query.rq
