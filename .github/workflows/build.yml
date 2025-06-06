@@ -58,6 +58,8 @@ jobs:
 
         tail -n +2 class_list.csv | sed 's|https://rmagro.org/ontology/||' > concept_names.txt
 
+        cat concept_names.txt
+
         for concept in $(cat concept_names.txt); do
           echo "Processing concept: $concept"
           echo "https://rmagro.org/ontology/$concept" > temp_concept.txt
